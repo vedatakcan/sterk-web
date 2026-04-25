@@ -9,33 +9,33 @@
         :root {
             --primary-orange: #ff5e3a;
             --star-white: rgba(255, 255, 255, 0.9);
-            --nav-bg: rgba(0, 0, 0, 0.6);
-            --text-gray: #AEAEB2;
+            --nav-bg: rgba(0, 0, 0, 0.2); /* Siyahlığı azalttık */
         }
 
-        /* TEMEL SIFIRLAMA */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html, body {
             height: 100%; width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--text-gray);
-            background: #020205;
-            overflow: hidden; /* Scroll içeride yönetilecek */
+            color: #ffffff;
+            background-color: #020205;
+            overflow: hidden; /* Kaydırma scroll-container içinde olacak */
         }
 
-        /* ARKA PLAN (UZAY TEMASI) */
+        /* ARKA PLAN (UZAY TEMASI) - GÖRÜNÜR HALE GETİRİLDİ */
         .background-stage {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -10; pointer-events: none;
-            background: linear-gradient(135deg, #020205 0%, #05050a 50%, #0a1931 100%);
+            z-index: 1; /* Yıldızlar ve gradyan görünmeli */
+            pointer-events: none;
+            background: linear-gradient(135deg, #020205 0%, #05050a 40%, #0a1931 100%);
         }
 
-        .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
         
         .twinkling-star {
             position: absolute; background: var(--star-white); border-radius: 50%;
             animation: twinkle 3s infinite ease-in-out;
+            box-shadow: 0 0 5px rgba(255,255,255,0.3);
         }
 
         @keyframes twinkle {
@@ -49,7 +49,7 @@
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; background: var(--nav-bg);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .back-link { 
@@ -63,21 +63,23 @@
 
         /* SCROLL VE İÇERİK KARTI */
         .scroll-container {
+            position: relative;
             height: 100vh; overflow-y: auto; 
-            padding-top: 80px; /* Navigasyon için boşluk */
+            padding-top: 100px; 
+            z-index: 10; /* İçerik en üstte */
             -webkit-overflow-scrolling: touch;
         }
 
         .content-wrapper {
-            max-width: 800px; margin: 40px auto; padding: 0 20px;
+            max-width: 850px; margin: 0 auto 50px; padding: 0 20px;
         }
 
         .policy-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.03); /* Çok hafif şeffaf */
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 40px; border-radius: 28px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
         h1 { color: #ffffff; font-size: clamp(24px, 5vw, 32px); margin-bottom: 25px; font-weight: 800; text-align: center; }
@@ -87,19 +89,19 @@
             padding-left: 15px;
         }
 
-        p { margin-bottom: 18px; font-size: 15px; line-height: 1.8; }
+        p { margin-bottom: 18px; font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.85); }
         strong { color: var(--primary-orange); font-weight: 600; }
 
         .footer-note {
-            font-size: 12px; color: #636366; margin-top: 60px;
-            text-align: center; border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 60px;
+            text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
             padding-top: 30px;
         }
 
         /* MOBİL DÜZENLEMELER */
         @media (max-width: 600px) {
-            .policy-card { padding: 30px 20px; border-radius: 20px; margin: 10px; }
-            .scroll-container { padding-top: 70px; }
+            .policy-card { padding: 30px 20px; border-radius: 20px; }
+            .scroll-container { padding-top: 80px; }
         }
     </style>
 </head>
@@ -115,40 +117,37 @@
             Geri Dön
         </a>
         <span class="logo-name">STERK</span>
-        <div style="width: 70px;"></div> </nav>
+        <div style="width: 70px;"></div> 
+    </nav>
 
     <div class="scroll-container">
         <div class="content-wrapper">
             <div class="policy-card">
                 <h1>Terms of Use</h1>
-                <p>By downloading, installing, or using the <strong>Sterk</strong> application ("App"), you agree to be bound by these Terms of Use between you and the application provider.</p>
+                <p>By downloading, installing, or using the <strong>Sterk</strong> application ("App"), you agree to be bound by these Terms of Use.</p>
 
                 <h2>1. App and Service Description</h2>
                 <p>Sterk is a multilingual word search and crossword puzzle game. The App is provided for entertainment and cognitive exercise purposes.</p>
 
                 <h2>2. Intellectual Property Rights</h2>
-                <p>All content within the App, including but not limited to software, design, graphics, algorithms, and game mechanics, is protected by applicable intellectual property laws.</p>
-                <p>Users agree not to copy, reproduce, distribute, reverse engineer, or create derivative works based on any part of the App.</p>
+                <p>All content within the App, including software, design, graphics, and game mechanics, is protected by applicable intellectual property laws.</p>
 
                 <h2>3. Service Changes</h2>
-                <p>The App is continuously evolving. Features may be modified, added, or removed at any time without prior notice. No guarantee is provided that the App will always be available, uninterrupted, or error-free.</p>
+                <p>Features may be modified, added, or removed at any time without prior notice. We do not guarantee uninterrupted service.</p>
 
-                <h2>4. Data and Progress Information</h2>
-                <p>Game progress, scores, and user preferences are stored locally on the user’s device. The developer is not responsible for any data loss caused by device failure, app deletion, or technical issues.</p>
+                <h2>4. Data and Progress</h2>
+                <p>Game progress and scores are stored locally on your device. The developer is not responsible for data loss due to app deletion or device issues.</p>
 
-                <h2>5. Advertising and Third-Party Services</h2>
-                <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used. Third-party advertising providers may use device identifiers (such as IDFA) and similar anonymous data to serve and personalize ads.</p>
+                <h2>5. Advertising</h2>
+                <p>The App uses <strong>Google AdMob</strong> to provide free content. Ad providers may use device identifiers to personalize your experience.</p>
 
                 <h2>6. User Responsibilities</h2>
-                <p>Users agree to use the App in compliance with all applicable laws and regulations. Users must not engage in any activity that may harm the App, its systems, or other users’ experience.</p>
+                <p>Users must comply with all laws and not engage in activities that harm the App or other users' experience.</p>
 
                 <h2>7. Limitation of Liability</h2>
-                <p>The App is provided "as is" without warranties of any kind. The developer shall not be held liable for any direct or indirect damages, data loss, or technical issues arising from the use of the App.</p>
+                <p>The App is provided "as is". The developer is not liable for any direct or indirect damages arising from use.</p>
 
-                <h2>8. Changes to Terms</h2>
-                <p>These Terms of Use may be updated from time to time. Continued use of the App after updates constitutes acceptance of the revised terms.</p>
-
-                <h2>9. Contact</h2>
+                <h2>8. Contact</h2>
                 <p>For any questions regarding these Terms, please contact:<br>
                 <strong>sterkword@gmail.com</strong></p>
 
@@ -161,10 +160,11 @@
     </div>
 
     <script>
-        // Yıldızları oluştur
+        // Yıldızları oluştur (Ana sayfa ile aynı stil)
         window.onload = function() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 100; i++) {
+            const starCount = 120;
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2 + 0.5;
@@ -173,6 +173,7 @@
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = Math.random() * 1 + 's';
                 container.appendChild(star);
             }
         };
