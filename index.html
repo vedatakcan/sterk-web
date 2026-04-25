@@ -1,187 +1,190 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sterk: Crossword - Gezegenler Arası Yolculuk</title>
-    
-    <style>
-        :root {
-            --primary-orange: #ff5e3a;
-            --deep-space: #020205;
-            --nebula-glow: rgba(26, 11, 46, 0.8);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sterk: Crossword</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+:root {
+    --primary-orange: #ff5e3a;
+    --deep-space: #020205;
+}
 
-        body, html {
-            height: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--deep-space);
-            color: #ffffff;
-            overflow: hidden;
-        }
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* NEBULA DERİNLİK */
-        .nebula-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 80% 20%, rgba(255, 94, 58, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(ellipse at bottom, var(--nebula-glow) 0%, transparent 70%);
-            z-index: -3;
-        }
+body {
+    font-family: -apple-system, sans-serif;
+    background: radial-gradient(ellipse at bottom, #0a0a1a 0%, #000 100%);
+    color:white;
+    overflow-x:hidden;
+}
 
-        /* PARLAYAN VE HAREKETLİ YILDIZLAR */
-        .star-field {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
+/* 🌌 YILDIZ KATMANLARI (PARALLAX) */
+.stars, .stars2, .stars3 {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background-repeat: repeat;
+    z-index:-1;
+}
 
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
+.stars { background-image: radial-gradient(2px 2px white, transparent); animation: moveStars 200s linear infinite; }
+.stars2 { background-image: radial-gradient(1px 1px #aaa, transparent); animation: moveStars 300s linear infinite; opacity:0.5; }
+.stars3 { background-image: radial-gradient(1.5px 1.5px #fff, transparent); animation: moveStars 150s linear infinite; opacity:0.3; }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
+@keyframes moveStars {
+    from { transform: translate(0,0); }
+    to { transform: translate(-50%, -50%); }
+}
 
-        /* GEZEGENLER */
-        .planet {
-            position: fixed;
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(1px);
-            opacity: 0.7;
-        }
+/* NAV */
+nav {
+    position: fixed;
+    width:100%;
+    top:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 5%;
+    z-index:1000;
+}
 
-        .main-planet {
-            bottom: -100px;
-            left: -100px;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle at 70% 30%, #333 0%, #000 80%);
-            box-shadow: inset -10px -10px 40px rgba(0,0,0,1), 15px 15px 50px rgba(255, 94, 58, 0.1);
-        }
+/* LOGO */
+.logo-area {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:white;
+}
 
-        /* İÇERİK */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 25px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 100;
-        }
+.logo-img { width:35px; }
 
-        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
-        .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 94, 58, 0.4); }
-        .logo-name { font-size: 20px; font-weight: 800; letter-spacing: 2px; }
+/* MENU */
+.nav-menu {
+    display:flex;
+    gap:25px;
+}
 
-        .nav-menu a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 25px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-menu a:hover { color: var(--primary-orange); }
+.nav-menu a {
+    text-decoration:none;
+    color:rgba(255,255,255,0.6);
+    font-size:12px;
+}
 
-        .hero {
-            height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            text-align: center;
-        }
+.nav-menu a:hover {
+    color:var(--primary-orange);
+}
 
-        .main-title {
-            font-size: clamp(50px, 10vw, 85px); /* Daha makul bir boyut */
-            font-weight: 900;
-            letter-spacing: 15px;
-            background: linear-gradient(to bottom, #fff 50%, #888 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
+/* 🍔 HAMBURGER */
+.hamburger {
+    display:none;
+    flex-direction:column;
+    cursor:pointer;
+}
 
-        .sub-title {
-            font-size: 14px;
-            color: var(--primary-orange);
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
+.hamburger span {
+    width:25px;
+    height:3px;
+    background:white;
+    margin:4px 0;
+}
 
-        .tagline {
-            margin-top: 40px;
-            font-size: 16px;
-            color: rgba(255,255,255,0.4);
-            max-width: 500px;
-            line-height: 1.6;
-            font-weight: 300;
-        }
+/* HERO */
+.hero {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
 
-        footer {
-            position: absolute;
-            bottom: 30px;
-            width: 100%;
-            text-align: center;
-            font-size: 9px;
-            color: rgba(255,255,255,0.2);
-            letter-spacing: 1px;
-        }
-    </style>
+.main-title {
+    font-size: clamp(50px, 10vw, 80px);
+    letter-spacing:12px;
+    font-weight:900;
+}
+
+.sub-title {
+    color:var(--primary-orange);
+    letter-spacing:6px;
+    margin-top:10px;
+}
+
+.tagline {
+    margin-top:30px;
+    opacity:0.6;
+    max-width:400px;
+}
+
+/* 📱 MOBİL */
+@media(max-width:768px){
+
+    .nav-menu {
+        position:absolute;
+        top:70px;
+        right:0;
+        background:#000;
+        flex-direction:column;
+        width:200px;
+        padding:20px;
+        display:none;
+    }
+
+    .nav-menu.active {
+        display:flex;
+    }
+
+    .hamburger {
+        display:flex;
+    }
+}
+
+</style>
 </head>
+
 <body>
 
-    <div class="nebula-container"></div>
-    <div class="star-field" id="starField"></div>
-    <div class="planet main-planet"></div>
+<!-- 🌌 YILDIZLAR -->
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
 
-    <nav>
-        <a href="index.html" class="logo-area">
-            <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
-            <span class="logo-name">STERK</span>
-        </a>
-        <div class="nav-menu">
-            <a href="index.html">ANA SAYFA</a>
-            <a href="privacy.html">GİZLİLİK</a>
-            <a href="terms.html">KOŞULLAR</a>
-        </div>
-    </nav>
+<nav>
+    <a href="#" class="logo-area">
+        <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" class="logo-img">
+        <span>STERK</span>
+    </a>
 
-    <div class="hero">
-        <h1 class="main-title">STERK</h1>
-        <div class="sub-title">PLANET JOURNEY</div>
-        <p class="tagline">Kelimelerin gücüyle galaksiyi keşfet. Yıldızların arasında zihnini özgür bırak.</p>
+    <div class="nav-menu" id="menu">
+        <a href="#">ANA SAYFA</a>
+        <a href="privacy.html">GİZLİLİK</a>
+        <a href="terms.html">KOŞULLAR</a>
     </div>
 
-    <footer>
-        &copy; 2026 STERK. ALL RIGHTS RESERVED.
-    </footer>
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
 
-    <script>
-        // Rastgele parlayan yıldızlar oluşturma
-        const starField = document.getElementById('starField');
-        const starCount = 100;
+<div class="hero">
+    <h1 class="main-title">STERK</h1>
+    <div class="sub-title">SPACE WORD GAME</div>
+    <p class="tagline">
+        Discover words across the galaxy. Challenge your mind beyond the stars.
+    </p>
+</div>
 
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            const size = Math.random() * 2 + 1;
-            const duration = Math.random() * 3 + 2;
+<script>
+function toggleMenu(){
+    document.getElementById("menu").classList.toggle("active");
+}
+</script>
 
-            star.style.left = `${x}%`;
-            star.style.top = `${y}%`;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.setProperty('--duration', `${duration}s`);
-            
-            starField.appendChild(star);
-        }
-    </script>
 </body>
 </html>
