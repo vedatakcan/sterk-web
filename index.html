@@ -10,6 +10,8 @@
             --primary-orange: #ff5e3a;
             --star-white: rgba(255, 255, 255, 0.9);
             --nav-bg: rgba(0, 0, 0, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.03); /* Çok hafif şeffaf beyaz */
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,6 +83,7 @@
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
 
+        /* MOBİL MENÜ */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; 
             width: 75%; height: 100vh;
@@ -107,6 +110,7 @@
         }
         .menu-overlay.active { opacity: 1; visibility: visible; }
 
+        /* HERO & BANNER */
         .hero {
             position: relative; height: 100vh; 
             display: flex; flex-direction: column;
@@ -114,21 +118,47 @@
             z-index: 10;
         }
 
-        .main-title {
-            font-size: clamp(60px, 18vw, 120px); font-weight: 900; letter-spacing: 10px;
-            background: linear-gradient(to bottom, #ffffff 30%, #a1a1a1 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        .hero-banner {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px 60px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .sub-title { color: var(--primary-orange); letter-spacing: 6px; font-weight: 700; font-size: 16px; margin-top: -10px; }
-        .tagline { margin-top: 25px; font-size: 18px; color: rgba(255,255,255,0.8); max-width: 500px; padding: 0 20px; }
+        .main-title {
+            font-size: clamp(60px, 15vw, 100px); font-weight: 900; letter-spacing: 10px;
+            background: linear-gradient(to bottom, #ffffff 30%, #a1a1a1 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
 
-        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); z-index: 10; }
+        .sub-title { 
+            color: var(--primary-orange); 
+            letter-spacing: 8px; 
+            font-weight: 700; 
+            font-size: clamp(14px, 4vw, 20px); 
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        .tagline { 
+            margin-top: 25px; 
+            font-size: clamp(14px, 3vw, 18px); 
+            color: rgba(255,255,255,0.7); 
+            max-width: 450px; 
+            line-height: 1.6;
+        }
+
+        footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); z-index: 10; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: block; }
             .planet-saturn { width: 120px; height: 120px; bottom: 10%; right: 5%; }
+            .hero-banner { padding: 30px 20px; width: 90%; }
         }
     </style>
 </head>
@@ -165,9 +195,11 @@
     </div>
 
     <main class="hero">
-        <h1 class="main-title">STERK</h1>
-        <div class="sub-title">Planet Journey</div>
-        <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak.</p>
+        <div class="hero-banner">
+            <h1 class="main-title">STERK</h1>
+            <div class="sub-title">CROSSWORD</div>
+            <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak ve evrenin sırlarını çöz.</p>
+        </div>
     </main>
 
     <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
@@ -177,7 +209,6 @@
         const mobileMenu = document.getElementById('mobileMenu');
         const menuOverlay = document.getElementById('menuOverlay');
 
-        // Menüyü açma/kapama fonksiyonu
         function toggleMenu() {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('active');
@@ -185,7 +216,6 @@
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         }
 
-        // Geri tuşuna basıldığında menüyü her zaman kapatan yeni kısım
         window.onpageshow = function(event) {
             hamburger.classList.remove('open');
             mobileMenu.classList.remove('active');
@@ -196,7 +226,6 @@
         hamburger.addEventListener('click', toggleMenu);
         menuOverlay.addEventListener('click', toggleMenu);
 
-        // Yıldızlar
         window.onload = function() {
             const container = document.getElementById('stars-container');
             for (let i = 0; i < 150; i++) {
