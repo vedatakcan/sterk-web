@@ -18,10 +18,10 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             color: #ffffff; 
             background: #020205; 
-            overflow: hidden; /* Scroll içeride yönetilecek */
+            overflow: hidden;
         }
 
-        /* ARKA PLAN TEMASI (ANA SAYFAYLA AYNI) */
+        /* ARKA PLAN */
         .background-stage { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             z-index: 1; 
@@ -41,42 +41,39 @@
             50% { opacity: 1; transform: scale(1.2); } 
         }
 
-        /* ÜST NAVİGASYON */
+        /* SADELEŞTİRİLMİŞ ÜST BAR */
         nav { 
-            position: fixed; top: 0; width: 100%; padding: 15px 5%; 
-            display: flex; align-items: center; justify-content: space-between;
+            position: fixed; top: 0; width: 100%; padding: 20px 0; 
+            display: flex; align-items: center; justify-content: center;
             z-index: 1000; background: var(--nav-bg); 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); 
             border-bottom: 1px solid rgba(255,255,255,0.05); 
         }
         
-        .back-link { 
-            text-decoration: none; color: white; display: flex; align-items: center; 
-            gap: 8px; font-weight: 600; font-size: 14px; transition: 0.3s; 
-        }
-        .back-link:hover { color: var(--primary-orange); transform: translateX(-3px); }
+        .logo-text { font-weight: 800; letter-spacing: 4px; font-size: 16px; color: #ffffff; }
 
-        /* İÇERİK ALANI VE KART YAPISI */
+        /* İÇERİK ALANI */
         .scroll-container {
             position: relative; height: 100vh; overflow-y: auto; 
             padding-top: 100px; padding-bottom: 50px; z-index: 10;
             -webkit-overflow-scrolling: touch;
         }
 
-        .container { max-width: 850px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
         .policy-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 40px; border-radius: 28px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        h1 { color: #ffffff; font-size: clamp(24px, 5vw, 32px); margin-bottom: 30px; text-align: center; font-weight: 800; }
+        h1 { color: #ffffff; font-size: clamp(24px, 5vw, 30px); margin-bottom: 30px; text-align: center; font-weight: 800; }
         h2 { 
-            color: #ffffff; font-size: 20px; margin-top: 35px; margin-bottom: 15px; 
+            color: #ffffff; font-size: 18px; margin-top: 35px; margin-bottom: 15px; 
             border-left: 3px solid var(--primary-orange); padding-left: 15px;
+            font-weight: 700;
         }
         
         p { margin-bottom: 16px; font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.8); }
@@ -84,17 +81,15 @@
         li { margin-bottom: 10px; font-size: 15px; }
         strong { color: var(--primary-orange); font-weight: 600; }
         a { color: #0A84FF; text-decoration: none; }
-        a:hover { text-decoration: underline; }
 
         .footer { 
-            font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 60px; 
+            font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 60px; 
             text-align: center; border-top: 1px solid rgba(255,255,255,0.05); 
-            padding-top: 25px; 
+            padding-top: 25px; letter-spacing: 1px;
         }
 
         @media (max-width: 600px) {
             .policy-card { padding: 30px 20px; border-radius: 20px; }
-            nav { padding: 15px 20px; }
         }
     </style>
 </head>
@@ -104,12 +99,7 @@
     </div>
 
     <nav>
-        <a href="index.html" class="back-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Geri Dön
-        </a>
-        <span style="font-weight: 800; letter-spacing: 2px; font-size: 14px;">STERK</span>
-        <div style="width: 70px;"></div>
+        <span class="logo-text">STERK</span>
     </nav>
 
     <div class="scroll-container">
@@ -121,23 +111,22 @@
                 <h2>1. Data Collection and Usage</h2>
                 <p>The App is designed with a data minimization approach:</p>
                 <ul>
-                    <li><strong>Personal Data:</strong> The App does not directly collect, store, or share personal information such as name, email, phone number, or location.</li>
+                    <li><strong>Personal Data:</strong> The App does not directly collect, store, or share personal information such as name, email, or location.</li>
                     <li><strong>Local Data:</strong> Game progress, scores, and settings are stored locally on the user’s device only.</li>
                 </ul>
 
                 <h2>2. Advertising and Third-Party Services</h2>
-                <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used.</p>
-                <p>Third-party advertising providers may use device identifiers (such as IDFA), cookies, and similar anonymous identifiers to serve and personalize ads. These processes are not directly controlled by the App developer.</p>
-                <p>For more information, please review <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
+                <p>The App uses <strong>Google AdMob</strong> to remain free. Third-party providers may use device identifiers (IDFA/AAID) to serve personalized ads.</p>
+                <p>For more details, see <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
 
                 <h2>3. Data Security</h2>
-                <p>The App implements reasonable technical measures to protect user data. However, no method of transmission over the internet is 100% secure.</p>
+                <p>We implement technical measures to protect your local data. However, no digital storage is 100% secure.</p>
 
                 <h2>4. Changes to This Policy</h2>
-                <p>This Privacy Policy may be updated from time to time. Continued use of the App after updates constitutes acceptance of the revised policy.</p>
+                <p>This policy may be updated. Continued use of the App constitutes acceptance of the revised terms.</p>
 
                 <h2>5. Contact</h2>
-                <p>For any questions, please contact:<br><strong>sterkword@gmail.com</strong></p>
+                <p>Questions? Reach out to us:<br><strong>sterkword@gmail.com</strong></p>
 
                 <div class="footer">
                     Last Updated: April 13, 2026<br>
@@ -148,7 +137,6 @@
     </div>
 
     <script>
-        // Ana sayfa ile aynı yıldız oluşturma mantığı
         window.onload = function() {
             const container = document.getElementById('stars-container');
             const starCount = 120;
