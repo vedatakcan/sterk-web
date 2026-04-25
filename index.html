@@ -54,7 +54,7 @@
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1100; /* Menüden daha üstte olmalı ki buton görünsün */
+            z-index: 1100;
             background: var(--nav-bg);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -68,7 +68,6 @@
         .nav-links a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-orange); }
 
-        /* HAMBURGER BUTONU VE X ANİMASYONU */
         .hamburger { 
             display: none; cursor: pointer; background: none; border: none; 
             z-index: 1200; padding: 10px; 
@@ -78,16 +77,14 @@
             margin: 6px 0; transition: 0.4s; border-radius: 2px; 
         }
 
-        /* X Animasyonu için CSS */
         .hamburger.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
 
-        /* MOBİL MENÜ - YARIM PANEL TASARIMI */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; 
-            width: 75%; height: 100vh; /* Ekranın %75'ini kaplar */
-            background: rgba(10, 25, 49, 0.95); /* Uzay mavisi tonunda bir panel */
+            width: 75%; height: 100vh;
+            background: rgba(10, 25, 49, 0.95);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             display: flex; flex-direction: column; justify-content: center; 
             padding-left: 40px; gap: 35px; 
@@ -103,7 +100,6 @@
         }
         .mobile-menu a:hover { color: var(--primary-orange); }
 
-        /* Overlay (Menü açıldığında sol tarafı karartan katman) */
         .menu-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
@@ -111,7 +107,6 @@
         }
         .menu-overlay.active { opacity: 1; visibility: visible; }
 
-        /* HERO ALANI */
         .hero {
             position: relative; height: 100vh; 
             display: flex; flex-direction: column;
@@ -182,16 +177,24 @@
         const mobileMenu = document.getElementById('mobileMenu');
         const menuOverlay = document.getElementById('menuOverlay');
 
+        // Menüyü açma/kapama fonksiyonu
         function toggleMenu() {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
-            // Menü açıkken arka planın kaymasını engelle
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         }
 
+        // Geri tuşuna basıldığında menüyü her zaman kapatan yeni kısım
+        window.onpageshow = function(event) {
+            hamburger.classList.remove('open');
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
         hamburger.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', toggleMenu); // Karartmaya basınca da kapansın
+        menuOverlay.addEventListener('click', toggleMenu);
 
         // Yıldızlar
         window.onload = function() {
