@@ -9,7 +9,7 @@
         :root {
             --primary-orange: #ff5e3a;
             --star-white: rgba(255, 255, 255, 0.9);
-            --nav-bg: rgba(0, 0, 0, 0.2); /* Daha şeffaf yaptık */
+            --nav-bg: rgba(0, 0, 0, 0.2);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,20 +18,14 @@
             height: 100%; width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: #ffffff;
-            background-color: #020205; /* Temel renk */
+            background-color: #020205;
             overflow-x: hidden;
         }
 
-        /* ARKA PLAN - BURASI DÜZELTİLDİ */
+        /* ARKA PLAN */
         .background-stage {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1; /* Arka planı görünür seviyeye aldık */
-            pointer-events: none;
-            /* Gradyan daha canlı hale getirildi */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
             background: linear-gradient(135deg, #020205 0%, #05050a 40%, #0a1931 100%);
         }
 
@@ -49,12 +43,9 @@
         }
 
         .planet-saturn {
-            position: absolute; 
-            width: 180px; height: 180px; 
-            border-radius: 50%;
+            position: absolute; width: 180px; height: 180px; border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #d4a373, #3f3225);
-            bottom: 15%; 
-            right: 10%; /* Konumu daha dengeli yapıldı */
+            bottom: 15%; right: 10%;
             box-shadow: inset -20px -20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 163, 115, 0.2);
             z-index: 3;
         }
@@ -63,7 +54,7 @@
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; 
+            z-index: 1100; /* Menüden daha üstte olmalı ki buton görünsün */
             background: var(--nav-bg);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -77,40 +68,67 @@
         .nav-links a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-orange); }
 
-        /* HERO ALANI - İÇERİK ÖNE ÇIKARILDI */
+        /* HAMBURGER BUTONU VE X ANİMASYONU */
+        .hamburger { 
+            display: none; cursor: pointer; background: none; border: none; 
+            z-index: 1200; padding: 10px; 
+        }
+        .hamburger span { 
+            display: block; width: 25px; height: 2px; background: white; 
+            margin: 6px 0; transition: 0.4s; border-radius: 2px; 
+        }
+
+        /* X Animasyonu için CSS */
+        .hamburger.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+
+        /* MOBİL MENÜ - YARIM PANEL TASARIMI */
+        .mobile-menu {
+            position: fixed; top: 0; right: -100%; 
+            width: 75%; height: 100vh; /* Ekranın %75'ini kaplar */
+            background: rgba(10, 25, 49, 0.95); /* Uzay mavisi tonunda bir panel */
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            display: flex; flex-direction: column; justify-content: center; 
+            padding-left: 40px; gap: 35px; 
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0); 
+            z-index: 1050;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { 
+            font-size: 20px; color: white; text-decoration: none; 
+            font-weight: 600; letter-spacing: 1px; transition: 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--primary-orange); }
+
+        /* Overlay (Menü açıldığında sol tarafı karartan katman) */
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
+            transition: 0.4s; z-index: 1040;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        /* HERO ALANI */
         .hero {
-            position: relative;
-            height: 100vh; 
+            position: relative; height: 100vh; 
             display: flex; flex-direction: column;
-            justify-content: center; align-items: center; 
-            text-align: center;
-            z-index: 10; /* Yazılar yıldızların üstünde olmalı */
+            justify-content: center; align-items: center; text-align: center;
+            z-index: 10;
         }
 
         .main-title {
             font-size: clamp(60px, 18vw, 120px); font-weight: 900; letter-spacing: 10px;
             background: linear-gradient(to bottom, #ffffff 30%, #a1a1a1 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
 
-        .sub-title { color: var(--primary-orange); letter-spacing: 6px; font-weight: 700; font-size: 16px; text-transform: uppercase; margin-top: -10px; }
-        .tagline { margin-top: 25px; font-size: 18px; color: rgba(255,255,255,0.8); max-width: 500px; padding: 0 20px; line-height: 1.6; }
+        .sub-title { color: var(--primary-orange); letter-spacing: 6px; font-weight: 700; font-size: 16px; margin-top: -10px; }
+        .tagline { margin-top: 25px; font-size: 18px; color: rgba(255,255,255,0.8); max-width: 500px; padding: 0 20px; }
 
-        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); z-index: 10; letter-spacing: 1px; }
-
-        /* MOBİL AYARLAR */
-        .hamburger { display: none; cursor: pointer; background: none; border: none; z-index: 1100; padding: 10px; }
-        .hamburger span { display: block; width: 28px; height: 3px; background: white; margin: 5px 0; transition: 0.4s; border-radius: 2px; }
-
-        .mobile-menu {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: rgba(2, 2, 5, 0.98); backdrop-filter: blur(20px);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            gap: 35px; transition: 0.5s; z-index: 1050;
-        }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu a { font-size: 24px; color: white; text-decoration: none; font-weight: 600; }
+        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); z-index: 10; }
 
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -126,6 +144,8 @@
         <div class="planet-saturn"></div>
     </div>
 
+    <div class="menu-overlay" id="menuOverlay"></div>
+
     <nav>
         <a href="index.html" class="logo-area">
             <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
@@ -138,7 +158,7 @@
             <a href="terms.html">Kullanım Koşulları</a>
         </div>
 
-        <button class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" aria-label="Menü">
             <span></span><span></span><span></span>
         </button>
     </nav>
@@ -158,21 +178,25 @@
     <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
 
     <script>
-        // Hamburger Menü Kontrolü
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
 
-        hamburger.addEventListener('click', () => {
+        function toggleMenu() {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('active');
-        });
+            menuOverlay.classList.toggle('active');
+            // Menü açıkken arka planın kaymasını engelle
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
 
-        // Yıldız Oluşturma Fonksiyonu
+        hamburger.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu); // Karartmaya basınca da kapansın
+
+        // Yıldızlar
         window.onload = function() {
             const container = document.getElementById('stars-container');
-            const starCount = 150; // Yıldız sayısını artırdık
-            
-            for (let i = 0; i < starCount; i++) {
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2.5 + 0.5;
