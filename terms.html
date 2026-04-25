@@ -9,7 +9,7 @@
         :root {
             --primary-orange: #ff5e3a;
             --star-white: rgba(255, 255, 255, 0.9);
-            --nav-bg: rgba(0, 0, 0, 0.4);
+            --nav-bg: rgba(0, 0, 0, 0.6);
             --text-gray: #AEAEB2;
         }
 
@@ -20,10 +20,11 @@
             height: 100%; width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: var(--text-gray);
-            background: transparent; /* Uzay temasının görünmesi için */
+            background: #020205;
+            overflow: hidden; /* Scroll içeride yönetilecek */
         }
 
-        /* ARKA PLAN (ANA SAYFAYLA AYNI) */
+        /* ARKA PLAN (UZAY TEMASI) */
         .background-stage {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -10; pointer-events: none;
@@ -42,63 +43,63 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* NAVİGASYON */
+        /* GERİ DÖNÜŞ NAVİGASYONU */
         nav {
             position: fixed; top: 0; width: 100%; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000; background: var(--nav-bg);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
-        .logo-img { width: 30px; height: 30px; border-radius: 6px; }
-        .logo-name { font-size: 16px; font-weight: 800; letter-spacing: 2px; }
-
-        .nav-links a { 
-            text-decoration: none; color: rgba(255,255,255,0.8); 
-            font-size: 13px; margin-left: 20px; transition: 0.3s; 
+        .back-link { 
+            display: flex; align-items: center; gap: 8px; 
+            text-decoration: none; color: white; font-weight: 600; font-size: 14px;
+            transition: 0.3s;
         }
-        .nav-links a:hover { color: var(--primary-orange); }
+        .back-link:hover { color: var(--primary-orange); transform: translateX(-3px); }
 
-        /* İÇERİK ALANI */
+        .logo-name { font-size: 16px; font-weight: 800; letter-spacing: 2px; color: white; }
+
+        /* SCROLL VE İÇERİK KARTI */
         .scroll-container {
-            height: 100vh; overflow-y: auto; padding-top: 100px; padding-bottom: 50px;
+            height: 100vh; overflow-y: auto; 
+            padding-top: 80px; /* Navigasyon için boşluk */
+            -webkit-overflow-scrolling: touch;
         }
 
         .content-wrapper {
-            max-width: 800px; margin: 0 auto; padding: 0 25px;
+            max-width: 800px; margin: 40px auto; padding: 0 20px;
         }
 
         .policy-card {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px; border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 40px; border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        h1 { color: #ffffff; font-size: 28px; margin-bottom: 20px; font-weight: 800; }
+        h1 { color: #ffffff; font-size: clamp(24px, 5vw, 32px); margin-bottom: 25px; font-weight: 800; text-align: center; }
         h2 { 
-            color: #ffffff; font-size: 19px; margin-top: 35px; margin-bottom: 15px; 
-            font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); 
-            padding-bottom: 10px; 
+            color: #ffffff; font-size: 19px; margin-top: 40px; margin-bottom: 15px; 
+            font-weight: 700; border-left: 3px solid var(--primary-orange); 
+            padding-left: 15px;
         }
 
-        p { margin-bottom: 16px; font-size: 15px; line-height: 1.8; }
+        p { margin-bottom: 18px; font-size: 15px; line-height: 1.8; }
         strong { color: var(--primary-orange); font-weight: 600; }
 
         .footer-note {
-            font-size: 12px; color: #636366; margin-top: 50px;
-            text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 25px;
+            font-size: 12px; color: #636366; margin-top: 60px;
+            text-align: center; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
         }
 
+        /* MOBİL DÜZENLEMELER */
         @media (max-width: 600px) {
-            .policy-card { padding: 25px; border-radius: 0; background: transparent; border: none; }
-            .content-wrapper { padding: 0; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; }
+            .policy-card { padding: 30px 20px; border-radius: 20px; margin: 10px; }
+            .scroll-container { padding-top: 70px; }
         }
     </style>
 </head>
@@ -109,15 +110,12 @@
     </div>
 
     <nav>
-        <a href="index.html" class="logo-area">
-            <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
-            <span class="logo-name">STERK</span>
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Geri Dön
         </a>
-        <div class="nav-links">
-            <a href="index.html">Ana Sayfa</a>
-            <a href="privacy.html">Gizlilik Politikası</a>
-        </div>
-    </nav>
+        <span class="logo-name">STERK</span>
+        <div style="width: 70px;"></div> </nav>
 
     <div class="scroll-container">
         <div class="content-wrapper">
@@ -133,16 +131,13 @@
                 <p>Users agree not to copy, reproduce, distribute, reverse engineer, or create derivative works based on any part of the App.</p>
 
                 <h2>3. Service Changes</h2>
-                <p>The App is continuously evolving. Features may be modified, added, or removed at any time without prior notice.</p>
-                <p>No guarantee is provided that the App will always be available, uninterrupted, or error-free.</p>
+                <p>The App is continuously evolving. Features may be modified, added, or removed at any time without prior notice. No guarantee is provided that the App will always be available, uninterrupted, or error-free.</p>
 
                 <h2>4. Data and Progress Information</h2>
-                <p>Game progress, scores, and user preferences are stored locally on the user’s device.</p>
-                <p>The developer is not responsible for any data loss caused by device failure, app deletion, or technical issues.</p>
+                <p>Game progress, scores, and user preferences are stored locally on the user’s device. The developer is not responsible for any data loss caused by device failure, app deletion, or technical issues.</p>
 
                 <h2>5. Advertising and Third-Party Services</h2>
-                <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used.</p>
-                <p>Third-party advertising providers may use device identifiers (such as IDFA) and similar anonymous data to serve and personalize ads.</p>
+                <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used. Third-party advertising providers may use device identifiers (such as IDFA) and similar anonymous data to serve and personalize ads.</p>
 
                 <h2>6. User Responsibilities</h2>
                 <p>Users agree to use the App in compliance with all applicable laws and regulations. Users must not engage in any activity that may harm the App, its systems, or other users’ experience.</p>
@@ -166,9 +161,10 @@
     </div>
 
     <script>
+        // Yıldızları oluştur
         window.onload = function() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 100; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2 + 0.5;
