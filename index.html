@@ -9,7 +9,9 @@
         :root {
             --primary-orange: #ff5e3a;
             --space-black: #050508;
-            --nebula-purple: #1a0b2e;
+            /* Referans görselindeki mor tonu */
+            --referans-purple: #1a0b2e; 
+            --star-white: rgba(255, 255, 255, 0.9);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,34 +24,37 @@
             overflow: hidden;
         }
 
-        /* UZAY ARKA PLANI */
+        /* UZAY ARKA PLANI (REFERANS RENKLERİ) */
         .space-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Görseldeki gibi derinlik hissi veren gradient */
-            background: radial-gradient(circle at center, var(--nebula-purple) 0%, var(--space-black) 100%);
+            /* Merkezden dışa doğru bir gradyan ile referans görseldeki renk geçişini sağla */
+            background: radial-gradient(circle at center, var(--referans-purple) 0%, var(--space-black) 100%);
             z-index: -3;
         }
 
-        /* YILDIZLAR (Kesin Görünmesi İçin Ayrı Katman) */
-        #stars-container {
+        /* GERÇEKÇİ CSS YILDIZLARI */
+        .stars-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             pointer-events: none;
         }
 
-        .star {
+        /* Küçük, parlak yıldızlar için bir sınıf */
+        .twinkling-star {
             position: absolute;
-            background: white;
+            background: var(--star-white);
             border-radius: 50%;
             opacity: 0.8;
-            animation: blink 3s infinite ease-in-out;
+            /* Hafif bir dış ışıma (glow) */
+            box-shadow: 0 0 4px var(--star-white);
+            animation: twinkle 3s infinite ease-in-out;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
 
         /* GEZEGEN */
@@ -59,6 +64,7 @@
             right: -50px;
             width: 400px;
             height: 400px;
+            /* Kendi başına dönen, gölgeli bir gezegen */
             background: radial-gradient(circle at 30% 30%, #444, #000);
             border-radius: 50%;
             box-shadow: -20px -20px 50px rgba(26, 11, 46, 0.5), inset 10px 10px 50px rgba(255,255,255,0.1);
@@ -145,7 +151,7 @@
 <body>
 
     <div class="space-bg"></div>
-    <div id="stars-container"></div>
+    <div id="stars-container" class="stars-overlay"></div>
     <div class="planet-decor"></div>
 
     <nav>
@@ -185,22 +191,25 @@
             document.getElementById('mobileMenu').classList.toggle('active');
         }
 
-        // Yıldızları Dinamik Oluşturma (Kesin Çözüm)
+        // Referans Görseline Uygun Yıldızları Dinamik Oluşturma
         const container = document.getElementById('stars-container');
-        const starCount = 150;
+        // Görseldeki gibi seyrek ve net yıldızlar için sayıyı azalttık
+        const starCount = 100; 
 
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
-            star.className = 'star';
+            star.className = 'twinkling-star';
             
-            // Rastgele boyut ve pozisyon
-            const size = Math.random() * 3;
+            // Rastgele boyut (referans görselindeki gibi farklı boyutlar)
+            const size = Math.random() * 3 + 0.5; // 0.5px ile 3.5px arası
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
+            
+            // Rastgele pozisyon
             star.style.left = `${Math.random() * 100}%`;
             star.style.top = `${Math.random() * 100}%`;
             
-            // Rastgele parlama hızı
+            // Rastgele parlama hızı ve gecikmesi
             star.style.animationDuration = `${Math.random() * 3 + 2}s`;
             star.style.animationDelay = `${Math.random() * 5}s`;
 
