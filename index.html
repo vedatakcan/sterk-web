@@ -9,7 +9,6 @@
         :root {
             --primary-orange: #ff5e3a;
             --deep-space: #020205;
-            --star-color: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,49 +18,58 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--deep-space);
             color: #ffffff;
-            overflow-x: hidden;
+            /* Kaydırmayı tamamen engelliyoruz ki o siyah boşluk çıkmasın */
+            overflow: hidden; 
         }
 
-        /* CSS TABANLI PARLAYAN YILDIZLAR */
+        /* ARKA PLAN VE YILDIZLAR */
         .stars-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh;
             z-index: -2;
-            background: radial-gradient(ellipse at bottom, #1a0b2e 0%, var(--deep-space) 70%);
+            /* Nebula efekti tüm ekranı kaplasın */
+            background: radial-gradient(ellipse at bottom, #1a0b2e 0%, var(--deep-space) 100%);
         }
 
-        /* Küçük ve orta boy yıldızlar için kutu gölgesi (box-shadow) tekniği */
+        /* Yıldızları ekrana yaymak için absolute ve genişlik veriyoruz */
+        .stars, .stars-large {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: transparent;
+        }
+
         .stars {
             width: 1px; height: 1px;
-            background: transparent;
-            box-shadow: 24vw 15vh #FFF, 56vw 34vh #FFF, 12vw 88vh #FFF, 89vw 45vh #FFF, 45vw 22vh #FFF, 76vw 67vh #FFF, 33vw 56vh #FFF, 90vw 10vh #FFF, 10vw 30vh #FFF, 60vw 80vh #FFF, 25vw 75vh #FFF, 50vw 50vh #FFF;
+            /* Daha fazla ve yaygın yıldız gölgesi */
+            box-shadow: 10vw 20vh #FFF, 25vw 50vh #FFF, 40vw 10vh #FFF, 60vw 80vh #FFF, 80vw 30vh #FFF, 95vw 60vh #FFF, 15vw 85vh #FFF, 50vw 40vh #FFF, 75vw 15vh #FFF, 30vw 70vh #FFF, 85vw 90vh #FFF, 5vw 45vh #FFF;
             animation: twinkle 4s infinite ease-in-out;
         }
 
         .stars-large {
             width: 2px; height: 2px;
-            background: transparent;
-            box-shadow: 15vw 25vh #FFF, 85vw 75vh #FFF, 40vw 90vh #FFF, 70vw 20vh #FFF, 30vw 45vh #FFF;
+            box-shadow: 20vw 30vh #FFF, 70vw 60vh #FFF, 50vw 10vh #FFF, 10vw 90vh #FFF, 90vw 20vh #FFF;
             animation: twinkle 6s infinite ease-in-out;
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* GEZEGEN */
+        /* GEZEGEN - Pozisyonu düzeltildi */
         .planet {
             position: fixed;
-            bottom: -80px;
-            left: -80px;
-            width: 300px;
-            height: 300px;
+            bottom: -50px;
+            left: -50px;
+            width: clamp(200px, 40vw, 350px);
+            height: clamp(200px, 40vw, 350px);
             background: radial-gradient(circle at 70% 30%, #333 0%, #000 80%);
             border-radius: 50%;
-            box-shadow: inset -10px -10px 40px rgba(0,0,0,1), 15px 15px 40px rgba(255, 94, 58, 0.1);
+            box-shadow: inset -10px -10px 40px rgba(0,0,0,1), 10px 10px 30px rgba(255, 94, 58, 0.15);
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.8;
         }
 
         /* NAVİGASYON */
@@ -70,77 +78,67 @@
             top: 0; width: 100%;
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
         }
 
         .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
-        .logo-img { width: 35px; height: 35px; border-radius: 8px; box-shadow: 0 0 10px var(--primary-orange); }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; }
         .logo-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
 
         .nav-menu { display: flex; gap: 20px; }
-        .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; transition: 0.3s; font-weight: 500; }
-        .nav-menu a:hover { color: var(--primary-orange); }
+        .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500; }
 
-        /* HAMBURGER MENÜ (MOBİL) */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
-        .hamburger span {
-            width: 25px; height: 2px;
-            background-color: white;
-            transition: 0.3s;
-        }
+        /* MOBİL HAMBURGER */
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 25px; height: 2px; background: white; }
 
         .mobile-menu {
             position: fixed;
             top: 0; right: -100%;
-            width: 70%; height: 100%;
-            background: var(--deep-space);
+            width: 80%; height: 100%;
+            background: #05050a;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             gap: 30px;
             transition: 0.4s;
             z-index: 999;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a { color: white; text-decoration: none; font-size: 20px; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 1.5rem; }
 
-        /* HERO ALANI */
+        /* HERO */
         .hero {
             height: 100vh;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
         }
 
         .main-title {
-            font-size: clamp(50px, 12vw, 80px);
-            font-weight: 900; letter-spacing: 12px;
-            background: linear-gradient(to bottom, #fff, #888);
+            font-size: clamp(60px, 15vw, 100px);
+            font-weight: 900; letter-spacing: 10px;
+            background: linear-gradient(to bottom, #fff, #777);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
         }
 
         .sub-title {
             font-size: 14px; color: var(--primary-orange);
-            letter-spacing: 6px; text-transform: uppercase;
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-top: -10px;
         }
 
         .tagline {
-            margin-top: 30px; font-size: 16px; color: rgba(255,255,255,0.5);
-            max-width: 450px; line-height: 1.6;
+            margin-top: 30px; font-size: 1.1rem; color: rgba(255,255,255,0.6);
+            max-width: 500px; line-height: 1.5;
         }
 
-        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.2); }
+        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); }
 
-        /* MOBİL MEDYA SORGUSU */
         @media (max-width: 768px) {
             .nav-menu { display: none; }
             .hamburger { display: flex; }
@@ -158,7 +156,7 @@
 
     <nav>
         <a href="index.html" class="logo-area">
-            <img src="logo.png" alt="Sterk Logo" class="logo-img">
+            <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
             <span class="logo-name">STERK</span>
         </a>
         
