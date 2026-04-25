@@ -18,17 +18,17 @@
         body, html {
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--space-black); /* Yedek renk */
+            background-color: var(--space-black);
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* ARKA PLAN KATMANI */
+        /* ARKA PLAN KATMANI - Siyah ekranı önlemek için gradyan güçlendirildi */
         .space-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 50% 50%, var(--referans-purple) 0%, transparent 70%),
+                radial-gradient(circle at 50% 50%, var(--referans-purple) 0%, transparent 80%),
                 var(--space-black);
             z-index: -3;
         }
@@ -46,25 +46,26 @@
             border-radius: 50%;
             box-shadow: 0 0 6px var(--star-white);
             animation: twinkle 3s infinite ease-in-out;
+            opacity: 0; /* Başlangıçta gizli, JS ile gelecek */
         }
 
         @keyframes twinkle {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
+            0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* GEZEGEN */
+        /* GEZEGEN - Daha gerçekçi gölgelendirme */
         .planet-decor {
             position: fixed;
             bottom: -120px;
             right: -80px;
             width: 450px;
             height: 450px;
-            background: radial-gradient(circle at 30% 30%, #444, #000);
+            background: radial-gradient(circle at 30% 30%, #555, #000);
             border-radius: 50%;
-            box-shadow: -30px -30px 80px rgba(90, 0, 150, 0.3), inset 10px 10px 60px rgba(255,255,255,0.05);
+            box-shadow: -20px -20px 50px rgba(30, 13, 54, 0.5), inset 10px 10px 40px rgba(255,255,255,0.1);
             z-index: -1;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         /* NAVİGASYON */
@@ -73,7 +74,7 @@
             top: 0; width: 100%;
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
@@ -83,7 +84,6 @@
         .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 94, 58, 0.3); }
         .logo-name { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
 
-        /* MASAÜSTÜ MENÜ */
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { 
             color: rgba(255,255,255,0.7); 
@@ -94,7 +94,7 @@
         }
         .nav-links a:hover { color: var(--primary-orange); }
 
-        /* HAMBURGER BUTONU */
+        /* HAMBURGER */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -103,36 +103,24 @@
             gap: 6px;
         }
         .hamburger span {
-            display: block;
-            width: 28px;
-            height: 3px;
-            background-color: #fff;
-            border-radius: 2px;
-            transition: 0.3s;
+            display: block; width: 28px; height: 3px;
+            background-color: #fff; border-radius: 2px; transition: 0.3s;
         }
 
-        /* MOBİL OVERLAY MENÜ */
         .mobile-menu {
             position: fixed;
             top: 0; right: -100%;
             width: 80%; height: 100%;
-            background: rgba(10, 6, 18, 0.95);
+            background: rgba(10, 6, 18, 0.98);
             backdrop-filter: blur(20px);
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             gap: 35px;
             transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1050;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 22px; font-weight: 600; }
 
         /* HERO */
         .hero {
@@ -141,10 +129,12 @@
             justify-content: center; align-items: center;
             text-align: center;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .main-title {
-            font-size: clamp(60px, 18vw, 130px);
+            font-size: clamp(60px, 15vw, 130px);
             font-weight: 900; letter-spacing: 12px;
             background: linear-gradient(to bottom, #ffffff 40%, #777777 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -164,7 +154,6 @@
 
         footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); }
 
-        /* MOBİL AYARLAR */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
@@ -172,7 +161,6 @@
             .planet-decor { width: 300px; height: 300px; bottom: -60px; right: -40px; }
         }
 
-        /* Hamburger Animasyonu (Aktifken X olması için) */
         .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
@@ -218,7 +206,6 @@
     <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
 
     <script>
-        // Hamburger ve Mobil Menü Kontrolü
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
             const hamburger = document.getElementById('hamburger');
@@ -226,22 +213,26 @@
             hamburger.classList.toggle('active');
         }
 
-        // Yıldız Oluşturma
-        const container = document.getElementById('stars-container');
-        const starCount = 130;
+        // Yıldızları sayfa yüklendikten sonra oluştur (Siyah ekran hatasını önler)
+        window.onload = function() {
+            const container = document.getElementById('stars-container');
+            const starCount = 150;
 
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'twinkling-star';
-            const size = Math.random() * 2.5 + 0.5;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.left = `${Math.random() * 100}%`;
-            star.style.top = `${Math.random() * 100}%`;
-            star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-            star.style.animationDelay = `${Math.random() * 5}s`;
-            container.appendChild(star);
-        }
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'twinkling-star';
+                const size = Math.random() * 2 + 1;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                container.appendChild(star);
+            }
+        };
     </script>
 </body>
 </html>
