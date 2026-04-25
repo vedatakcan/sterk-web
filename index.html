@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sterk: Crossword - Gezegenler Arası Yolculuk</title>
+    
+    <style>
+        /* TEMEL TASARIM AYARLARI */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            /* Apple'ın modern yazı tipi */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Derin uzay teması: Koyu kırmızıdan siyaha gradyan */
+            background: radial-gradient(circle at top, #2b0a0a 0%, #000000 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Yıldız animasyonu için */
+        }
+
+        /* ARKA PLAN YILDIZ EFEKTİ (BASİT) */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEiIGZpbGw9IndoaXRlIiAvPjwvc3ZnPg==');
+            background-size: 200px 200px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* ANA İÇERİK KONTEYNERI */
+        .hero {
+            text-align: center;
+            z-index: 2; /* Yıldızların önünde durması için */
+            position: relative;
+        }
+
+        /* BAŞLIK: STERK */
+        .main-title {
+            font-size: 64px;
+            font-weight: 800;
+            letter-spacing: 5px;
+            margin: 0;
+            text-transform: uppercase;
+            /* Hafif bir dış ışıma (uzay teması için) */
+            text-shadow: 0 0 20px rgba(255, 94, 58, 0.5);
+            background: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* YAN BAŞLIK: CROSSWORD */
+        .sub-title {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: #ff5e3a; /* Uygulamadaki turuncu/kırmızı tonu */
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* SLOGAN VEYA KISA AÇIKLAMA */
+        .tagline {
+            font-size: 16px;
+            color: #aaaaaa;
+            margin-top: 40px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <div class="hero">
+        <h1 class="main-title">Sterk</h1>
+        <div class="sub-title">Crossword</div>
+        <p class="tagline">Gezegenler arası kelime avına hazır mısın? Yıldızların arasında zihnini zorla ve yeni dünyalar keşfet.</p>
+    </div>
+</body>
+</html>
