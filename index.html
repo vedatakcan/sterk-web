@@ -12,42 +12,24 @@
             --nav-bg: rgba(0, 0, 0, 0.4);
         }
 
-        /* TEMEL SIFIRLAMA */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         html, body {
-            height: 100%;
-            width: 100%;
+            height: 100%; width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: #ffffff;
-            background: transparent; 
-            overflow-x: hidden;
+            color: #ffffff; background: #020205; overflow-x: hidden;
         }
 
-        /* ARKA PLAN KATMANLARI */
+        /* ARKA PLAN */
         .background-stage {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -10;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -10; pointer-events: none;
             background: linear-gradient(135deg, #020205 0%, #05050a 50%, #0a1931 100%);
         }
 
-        .nebula {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(128, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(0, 128, 255, 0.08) 0%, transparent 50%);
-        }
-
         .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
         .twinkling-star {
-            position: absolute;
-            background: var(--star-white);
-            border-radius: 50%;
+            position: absolute; background: var(--star-white); border-radius: 50%;
             animation: twinkle 3s infinite ease-in-out;
         }
 
@@ -56,105 +38,80 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        .planet {
-            position: absolute;
-            border-radius: 50%;
-            box-shadow: inset -15px -15px 40px rgba(0,0,0,0.9);
-        }
-
         .planet-saturn {
-            width: 140px; height: 140px;
+            position: absolute; width: 140px; height: 140px; border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #d4a373, #3f3225);
-            bottom: 10%; left: 5%;
+            bottom: 10%; left: 5%; box-shadow: inset -15px -15px 40px rgba(0,0,0,0.9);
         }
 
-        /* NAVIGASYON VE MENÜ */
+        /* NAVİGASYON */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 5%;
+            position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 100;
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000; background: var(--nav-bg);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
 
         .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; }
         .logo-name { font-size: 18px; font-weight: 800; letter-spacing: 2px; }
 
-        /* Masaüstü Linkler */
-        .nav-links { display: flex; gap: 30px; align-items: center; }
-        .nav-links a { 
-            text-decoration: none; color: rgba(255,255,255,0.8); 
-            font-size: 14px; transition: 0.3s; font-weight: 500;
-        }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-orange); }
 
-        /* Hamburger İkonu */
+        /* HAMBURGER BUTONU (Kapatma Düğmesi Görevi Görür) */
         .hamburger {
-            display: none; cursor: pointer; z-index: 110;
-            background: none; border: none; outline: none;
+            display: none; cursor: pointer; background: none; border: none; 
+            z-index: 1100; /* Menüden daha üstte olmalı */
+            padding: 10px;
         }
         .hamburger span {
-            display: block; width: 25px; height: 3px;
-            background: white; margin: 5px 0; transition: 0.4s;
+            display: block; width: 28px; height: 3px; background: white;
+            margin: 5px 0; transition: 0.4s; border-radius: 2px;
         }
 
-        /* Mobil Menü Overlay */
+        /* MOBİL MENÜ */
         .mobile-menu {
             position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: rgba(2, 2, 5, 0.98);
+            background: rgba(2, 2, 5, 0.95); backdrop-filter: blur(15px);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            gap: 40px; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0); z-index: 105;
+            gap: 30px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1050;
         }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a {
-            font-size: 24px; color: white; text-decoration: none; letter-spacing: 2px;
-        }
+        .mobile-menu a { font-size: 22px; color: white; text-decoration: none; letter-spacing: 2px; font-weight: 600; }
 
-        /* HERO AREA */
+        /* HAMBURGER X ANİMASYONU */
+        .hamburger.open span:nth-child(1) { transform: rotate(-45deg) translate(-6px, 5px); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-6px, -5px); }
+
+        /* HERO */
         .hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 0 20px;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
         }
-
         .main-title {
-            font-size: clamp(50px, 15vw, 110px);
-            font-weight: 900; letter-spacing: 8px;
+            font-size: clamp(50px, 15vw, 110px); font-weight: 900; letter-spacing: 8px;
             background: linear-gradient(to bottom, #ffffff, #888888);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .sub-title { color: var(--primary-orange); letter-spacing: 5px; font-weight: 700; font-size: 14px; }
+        .tagline { margin-top: 20px; font-size: 16px; color: rgba(255,255,255,0.7); max-width: 400px; padding: 0 20px; }
 
-        .sub-title { color: var(--primary-orange); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 14px; }
-        .tagline { margin-top: 20px; font-size: 16px; color: rgba(255,255,255,0.7); max-width: 400px; line-height: 1.5; }
+        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); }
 
-        footer {
-            position: absolute; bottom: 20px; width: 100%;
-            text-align: center; font-size: 10px; color: rgba(255,255,255,0.4);
-        }
-
-        /* Hamburger Animasyonu (X olma) */
-        .hamburger.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-
-        /* RESPONSIVE AYARLAR */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: block; }
-            .planet-saturn { width: 100px; height: 100px; bottom: 15%; }
         }
     </style>
 </head>
 <body>
 
     <div class="background-stage">
-        <div class="nebula"></div>
         <div id="stars-container" class="stars-overlay"></div>
-        <div class="planet planet-saturn"></div>
+        <div class="planet-saturn"></div>
     </div>
 
     <nav>
@@ -169,7 +126,7 @@
             <a href="terms.html">Kullanım Koşulları</a>
         </div>
 
-        <button class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" aria-label="Menu">
             <span></span>
             <span></span>
             <span></span>
@@ -191,23 +148,15 @@
     <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
 
     <script>
-        // Hamburger Menü Kontrolü
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
 
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('active');
-            
-            // Menü açıkken sayfanın kaymasını engelle
-            if(mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Linklere tıklandığında menüyü kapat
         document.querySelectorAll('.mobile-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('open');
@@ -216,10 +165,9 @@
             });
         });
 
-        // Yıldızları oluşturma
         window.onload = function() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 150; i++) {
+            for (let i = 0; i < 120; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2 + 0.5;
@@ -228,7 +176,6 @@
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                star.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(star);
             }
         };
