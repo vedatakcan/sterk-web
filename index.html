@@ -31,10 +31,10 @@
         }
 
         .stars {
-            width: 1px; height: 1px;
+            width: 2px; height: 2px;
             background: transparent;
-            box-shadow: 1744px 122px #FFF , 134px 1321px #FFF , 156px 156px #FFF, 800px 400px #FFF, 200px 900px #FFF, 1400px 600px #FFF;
-            animation: spaceFly 100s linear infinite;
+            box-shadow: 1744px 122px #FFF, 134px 1321px #FFF, 156px 156px #FFF, 800px 400px #FFF, 200px 900px #FFF, 1400px 600px #FFF, 500px 200px #FFF;
+            animation: spaceFly 120s linear infinite;
         }
 
         @keyframes spaceFly {
@@ -46,13 +46,14 @@
         nav {
             position: fixed;
             top: 0; width: 100%;
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            z-index: 100;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo-area {
@@ -60,41 +61,70 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
+            z-index: 1001;
         }
 
         .logo-circle {
-            width: 35px; height: 35px;
+            width: 38px; height: 38px;
             background: linear-gradient(135deg, var(--primary-orange), #ff2e00);
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-weight: bold; color: white; font-size: 20px;
+            font-weight: bold; color: white; font-size: 22px;
+            box-shadow: 0 0 15px rgba(255, 94, 58, 0.4);
         }
 
         .logo-name {
-            font-size: 22px; font-weight: 800; color: white;
+            font-size: 24px; font-weight: 800; color: white;
             letter-spacing: 1px; text-transform: uppercase;
         }
 
         /* MASAÜSTÜ MENÜ */
         .nav-menu {
-            display: flex; gap: 30px;
+            display: flex; gap: 35px;
         }
 
         .nav-menu a {
-            color: #ccc; text-decoration: none; font-size: 14px;
+            color: #eee; text-decoration: none; font-size: 15px;
             transition: 0.3s; font-weight: 500;
         }
 
         .nav-menu a:hover { color: var(--primary-orange); }
 
-        /* MOBİL HAMBURGER */
-        .hamburger {
-            display: none; cursor: pointer; flex-direction: column; gap: 5px;
+        /* MOBİL MENÜ OVERLAY */
+        .mobile-overlay {
+            position: fixed;
+            top: 0; right: -100%; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            gap: 30px;
+            transition: 0.4s ease-in-out;
+            z-index: 999;
         }
 
-        .hamburger span {
-            width: 25px; height: 2px; background: white; border-radius: 2px;
+        .mobile-overlay.active {
+            right: 0;
         }
+
+        .mobile-overlay a {
+            color: white; text-decoration: none; font-size: 24px; font-weight: 600;
+        }
+
+        /* HAMBURGER BUTON */
+        .hamburger {
+            display: none; cursor: pointer; z-index: 1001;
+            padding: 10px;
+        }
+
+        .hamburger div {
+            width: 28px; height: 3px; background: white; margin: 5px;
+            transition: 0.4s; border-radius: 2px;
+        }
+
+        /* HAMBURGER ANİMASYON */
+        .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+        .toggle .line2 { opacity: 0; }
+        .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
         /* HERO ALANI */
         .hero {
@@ -107,41 +137,36 @@
         }
 
         .main-title {
-            font-size: clamp(48px, 10vw, 84px);
-            font-weight: 900; letter-spacing: 8px;
+            font-size: clamp(54px, 12vw, 90px);
+            font-weight: 900; letter-spacing: 10px;
             text-transform: uppercase;
-            background: linear-gradient(180deg, #fff 0%, #888 100%);
+            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
+            text-shadow: 0 0 30px rgba(255, 94, 58, 0.3);
         }
 
         .sub-title {
-            font-size: clamp(16px, 4vw, 22px);
+            font-size: clamp(18px, 5vw, 24px);
             color: var(--primary-orange);
-            letter-spacing: 4px; text-transform: uppercase;
-            font-weight: 300;
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-top: 10px;
         }
 
         .tagline {
-            margin-top: 30px; font-size: 18px; color: #888;
-            max-width: 500px; line-height: 1.6;
+            margin-top: 40px; font-size: 18px; color: #999;
+            max-width: 550px; line-height: 1.7;
         }
 
-        /* FOOTER */
         footer {
             position: absolute; bottom: 30px; width: 100%;
             text-align: center; z-index: 10;
         }
 
-        .copyright { color: #444; font-size: 12px; margin-top: 10px; }
+        .copyright { color: #444; font-size: 12px; }
 
-        /* RESPONSIVE AYARLAR */
         @media (max-width: 768px) {
-            .nav-menu { display: none; } /* Normal menüyü gizle */
-            .hamburger { display: flex; } /* Hamburgeri göster */
-            
-            /* Mobil menü açıldığında (Opsiyonel basitlik için gizli tuttuk) */
-            .main-title { letter-spacing: 4px; }
+            .nav-menu { display: none; }
+            .hamburger { display: block; }
         }
     </style>
 </head>
@@ -156,17 +181,25 @@
             <div class="logo-circle">S</div>
             <span class="logo-name">Sterk</span>
         </a>
+        
         <div class="nav-menu">
             <a href="index.html">Ana Sayfa</a>
-            <a href="privacy.html">Gizlilik</a>
-            <a href="terms.html">Koşullar</a>
+            <a href="privacy.html">Gizlilik Politikası</a>
+            <a href="terms.html">Kullanım Koşulları</a>
         </div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
         </div>
     </nav>
+
+    <div class="mobile-overlay" id="mobileOverlay">
+        <a href="index.html" onclick="toggleMenu()">Ana Sayfa</a>
+        <a href="privacy.html" onclick="toggleMenu()">Gizlilik Politikası</a>
+        <a href="terms.html" onclick="toggleMenu()">Kullanım Koşulları</a>
+    </div>
 
     <div class="hero">
         <h1 class="main-title">Sterk</h1>
@@ -180,8 +213,11 @@
 
     <script>
         function toggleMenu() {
-            // İleride mobil menü animasyonu eklemek istersen burayı kullanabilirsin
-            alert("Gizlilik ve Koşullar linkleri sayfanın altındadır.");
+            const overlay = document.getElementById('mobileOverlay');
+            const hamburger = document.getElementById('hamburger');
+            
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('toggle');
         }
     </script>
 
