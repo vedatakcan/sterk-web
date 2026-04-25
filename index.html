@@ -46,7 +46,7 @@
         nav {
             position: fixed;
             top: 0; width: 100%;
-            padding: 15px 5%;
+            padding: 12px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,33 +64,36 @@
             z-index: 1001;
         }
 
-        .logo-circle {
-            width: 38px; height: 38px;
-            background: linear-gradient(135deg, var(--primary-orange), #ff2e00);
+        /* LOGO GÖRSELİ AYARI */
+        .logo-img {
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: bold; color: white; font-size: 22px;
-            box-shadow: 0 0 15px rgba(255, 94, 58, 0.4);
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255, 94, 58, 0.3);
         }
 
         .logo-name {
-            font-size: 24px; font-weight: 800; color: white;
-            letter-spacing: 1px; text-transform: uppercase;
+            font-size: 22px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         /* MASAÜSTÜ MENÜ */
         .nav-menu {
-            display: flex; gap: 35px;
+            display: flex; gap: 30px;
         }
 
         .nav-menu a {
-            color: #eee; text-decoration: none; font-size: 15px;
+            color: #eee; text-decoration: none; font-size: 14px;
             transition: 0.3s; font-weight: 500;
         }
 
         .nav-menu a:hover { color: var(--primary-orange); }
 
-        /* MOBİL MENÜ OVERLAY */
+        /* MOBİL MENÜ */
         .mobile-overlay {
             position: fixed;
             top: 0; right: -100%; width: 100%; height: 100%;
@@ -102,18 +105,11 @@
             z-index: 999;
         }
 
-        .mobile-overlay.active {
-            right: 0;
-        }
+        .mobile-overlay.active { right: 0; }
+        .mobile-overlay a { color: white; text-decoration: none; font-size: 24px; font-weight: 600; }
 
-        .mobile-overlay a {
-            color: white; text-decoration: none; font-size: 24px; font-weight: 600;
-        }
-
-        /* HAMBURGER BUTON */
         .hamburger {
-            display: none; cursor: pointer; z-index: 1001;
-            padding: 10px;
+            display: none; cursor: pointer; z-index: 1001; padding: 10px;
         }
 
         .hamburger div {
@@ -121,12 +117,11 @@
             transition: 0.4s; border-radius: 2px;
         }
 
-        /* HAMBURGER ANİMASYON */
         .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
         .toggle .line2 { opacity: 0; }
         .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
-        /* HERO ALANI */
+        /* HERO */
         .hero {
             height: 100vh;
             display: flex; flex-direction: column;
@@ -178,8 +173,8 @@
 
     <nav>
         <a href="index.html" class="logo-area">
-    <img src="logo.png" alt="Sterk Logo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;">
-    <span class="logo-name">Sterk</span>
+            <img src="logo.png" alt="Sterk Logo" class="logo-img">
+            <span class="logo-name">Sterk</span>
         </a>
         
         <div class="nav-menu">
@@ -215,11 +210,9 @@
         function toggleMenu() {
             const overlay = document.getElementById('mobileOverlay');
             const hamburger = document.getElementById('hamburger');
-            
             overlay.classList.toggle('active');
             hamburger.classList.toggle('toggle');
         }
     </script>
-
 </body>
 </html>
