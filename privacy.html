@@ -3,179 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sterk - Gizlilik Politikası</title>
-    
+    <title>Sterk - Privacy Policy</title>
     <style>
-        :root {
-            --primary-orange: #ff5e3a;
-            --star-white: rgba(255, 255, 255, 0.9);
-            --nav-bg: rgba(0, 0, 0, 0.4);
-            --text-gray: #AEAEB2;
-        }
-
-        /* TEMEL SIFIRLAMA */
+        :root { --primary-orange: #ff5e3a; --star-white: rgba(255, 255, 255, 0.9); --nav-bg: rgba(0, 0, 0, 0.4); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        html, body {
-            height: 100%; width: 100%;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            color: var(--text-gray);
-            background: #020205;
-        }
-
-        /* ARKA PLAN (ANA SAYFAYLA AYNI) */
-        .background-stage {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -10; pointer-events: none;
-            background: linear-gradient(135deg, #020205 0%, #05050a 50%, #0a1931 100%);
-        }
-
+        body { font-family: -apple-system, sans-serif; color: #AEAEB2; background: #020205; overflow-x: hidden; }
+        .background-stage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10; background: linear-gradient(135deg, #020205 0%, #05050a 50%, #0a1931 100%); }
         .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        
-        .twinkling-star {
-            position: absolute; background: var(--star-white); border-radius: 50%;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        /* NAVİGASYON */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 15px 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; background: var(--nav-bg);
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
+        .twinkling-star { position: absolute; background: var(--star-white); border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
+        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(10px); }
         .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
-        .logo-img { width: 30px; height: 30px; border-radius: 6px; }
-        .logo-name { font-size: 16px; font-weight: 800; letter-spacing: 2px; }
-
-        .nav-links a { 
-            text-decoration: none; color: rgba(255,255,255,0.8); 
-            font-size: 13px; margin-left: 20px; transition: 0.3s; 
-        }
-        .nav-links a:hover { color: var(--primary-orange); }
-
-        /* İÇERİK ALANI */
-        .scroll-container {
-            height: 100vh; overflow-y: auto; padding-top: 100px; padding-bottom: 50px;
-        }
-
-        .content-wrapper {
-            max-width: 800px; margin: 0 auto; padding: 0 25px;
-        }
-
-        .policy-card {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px; border-radius: 24px;
-        }
-
-        h1 { color: #ffffff; font-size: 28px; margin-bottom: 20px; font-weight: 800; }
-        h2 { 
-            color: #ffffff; font-size: 19px; margin-top: 35px; margin-bottom: 15px; 
-            font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); 
-            padding-bottom: 10px; 
-        }
-
-        p { margin-bottom: 16px; font-size: 15px; line-height: 1.8; }
-        ul { margin-bottom: 16px; padding-left: 20px; }
-        li { margin-bottom: 8px; font-size: 15px; }
-
-        strong { color: var(--primary-orange); font-weight: 600; }
-        a { color: #0A84FF; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-
-        .footer-note {
-            font-size: 12px; color: #636366; margin-top: 50px;
-            text-align: center; border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 25px;
-        }
-
-        /* MOBİL AYARLAR */
-        @media (max-width: 600px) {
-            .policy-card { padding: 25px; border-radius: 0; background: transparent; border: none; }
-            .content-wrapper { padding: 0; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; } /* Mobilde sadelik için sakladık, logo ana sayfaya götürür */
-        }
+        .logo-name { font-size: 18px; font-weight: 800; letter-spacing: 2px; }
+        .content-container { max-width: 800px; margin: 100px auto 50px; padding: 40px; background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        h1 { color: #fff; margin-bottom: 20px; }
+        h2 { color: #fff; font-size: 19px; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        p { margin: 15px 0; line-height: 1.7; font-size: 15px; }
+        strong { color: var(--primary-orange); }
+        a { color: var(--primary-orange); text-decoration: none; }
+        @media (max-width: 600px) { .content-container { margin: 80px 15px; padding: 20px; } }
     </style>
 </head>
 <body>
-
-    <div class="background-stage">
-        <div id="stars-container" class="stars-overlay"></div>
-    </div>
-
+    <div class="background-stage"><div id="stars-container" class="stars-overlay"></div></div>
     <nav>
-        <a href="index.html" class="logo-area">
-            <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
-            <span class="logo-name">STERK</span>
-        </a>
-        <div class="nav-links">
-            <a href="index.html">Ana Sayfa</a>
-            <a href="terms.html">Kullanım Koşulları</a>
-        </div>
+        <a href="index.html" class="logo-area"><span class="logo-name">STERK</span></a>
+        <a href="index.html" style="color:white; text-decoration:none; font-size:14px;">← Geri</a>
     </nav>
-
-    <div class="scroll-container">
-        <div class="content-wrapper">
-            <div class="policy-card">
-                <h1>Privacy Policy</h1>
-                <p>This Privacy Policy explains how the <strong>Sterk</strong> mobile application ("App") collects, uses, and protects user information.</p>
-
-                <h2>1. Data Collection and Usage</h2>
-                <p>The App is designed with a data minimization approach:</p>
-                <ul>
-                    <li><strong>Personal Data:</strong> The App does not directly collect, store, or share personal information such as name, email, phone number, or location.</li>
-                    <li><strong>Local Data:</strong> Game progress, scores, and settings are stored locally on the user’s device only.</li>
-                </ul>
-
-                <h2>2. Advertising and Third-Party Services</h2>
-                <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used.</p>
-                <p>Third-party advertising providers may use device identifiers (such as IDFA), cookies, and similar anonymous identifiers to serve and personalize ads. These processes are not directly controlled by the App developer.</p>
-                <p>Users can manage ad personalization preferences through their device settings and control tracking permissions via Apple’s App Tracking Transparency (ATT) framework.</p>
-                <p>For more information, please review <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
-
-                <h2>3. Data Security</h2>
-                <p>The App implements reasonable technical measures to protect user data. However, no method of transmission over the internet is 100% secure.</p>
-
-                <h2>4. Changes to This Policy</h2>
-                <p>This Privacy Policy may be updated from time to time. Continued use of the App after updates constitutes acceptance of the revised policy.</p>
-
-                <h2>5. Contact</h2>
-                <p>For any questions, please contact:<br>
-                <strong>sterkword@gmail.com</strong></p>
-
-                <div class="footer-note">
-                    Last Updated: April 13, 2026<br>
-                    &copy; 2026 Sterk. All rights reserved.
-                </div>
-            </div>
-        </div>
+    <div class="content-container">
+        <h1>Privacy Policy</h1>
+        <p>This Privacy Policy explains how the <strong>Sterk</strong> mobile application ("App") collects, uses, and protects user information.</p>
+        <h2>1. Data Collection and Usage</h2>
+        <p>The App is designed with a data minimization approach: <strong>Personal Data</strong> is not collected. <strong>Local Data</strong> is stored only on your device.</p>
+        <h2>2. Advertising</h2>
+        <p>We use <strong>Google AdMob</strong>. Advertisers may use IDFA for personalized ads. You can manage this in your device settings.</p>
+        <p>Review: <a href="https://policies.google.com/privacy">Google Privacy Policy</a></p>
+        <h2>5. Contact</h2>
+        <p><strong>sterkword@gmail.com</strong></p>
     </div>
-
     <script>
-        // Yıldız Efekti (Ana sayfadaki ile aynı süreklilik için)
-        window.onload = function() {
-            const container = document.getElementById('stars-container');
+        window.onload = () => {
+            const c = document.getElementById('stars-container');
             for (let i = 0; i < 80; i++) {
-                const star = document.createElement('div');
-                star.className = 'twinkling-star';
-                const size = Math.random() * 2 + 0.5;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                container.appendChild(star);
+                const s = document.createElement('div'); s.className = 'twinkling-star';
+                s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%';
+                s.style.width = s.style.height = '1.5px'; c.appendChild(s);
             }
         };
     </script>
