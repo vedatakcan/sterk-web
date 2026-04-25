@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sterk: Crossword - Gezegenler Arası Yolculuk</title>
+    
     <style>
         :root {
             --primary-orange: #ff5e3a;
             --space-black: #050508;
-            --referans-purple: #1a0b2e; 
+            --referans-purple: #1e0d36; 
             --star-white: rgba(255, 255, 255, 0.9);
         }
 
@@ -17,23 +18,21 @@
         body, html {
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--space-black);
+            background-color: var(--space-black); /* Yedek renk */
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* 🔥 DİNAMİK UZAY KATMANLARI */
+        /* ARKA PLAN KATMANI */
         .space-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 50% 60%, rgba(90, 0, 150, 0.25), transparent 50%),
-                radial-gradient(circle at 20% 20%, rgba(255, 0, 150, 0.1), transparent 40%),
-                radial-gradient(circle at center, #1a0b2e 0%, #0a0612 60%, #050508 100%);
+                radial-gradient(circle at 50% 50%, var(--referans-purple) 0%, transparent 70%),
+                var(--space-black);
             z-index: -3;
         }
 
-        /* YILDIZLAR */
         .stars-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -74,21 +73,68 @@
             top: 0; width: 100%;
             padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             z-index: 1000;
         }
 
         .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
-        .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 94, 58, 0.4); }
+        .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 94, 58, 0.3); }
         .logo-name { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
 
-        .nav-menu { display: flex; gap: 25px; }
-        .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.3s; }
-        .nav-menu a:hover { color: var(--primary-orange); }
+        /* MASAÜSTÜ MENÜ */
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { 
+            color: rgba(255,255,255,0.7); 
+            text-decoration: none; 
+            font-size: 14px; 
+            font-weight: 500; 
+            transition: 0.3s; 
+        }
+        .nav-links a:hover { color: var(--primary-orange); }
 
-        /* HERO SECTIONS */
+        /* HAMBURGER BUTONU */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1100;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .hamburger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* MOBİL OVERLAY MENÜ */
+        .mobile-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 80%; height: 100%;
+            background: rgba(10, 6, 18, 0.95);
+            backdrop-filter: blur(20px);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            gap: 35px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1050;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* HERO */
         .hero {
             height: 100vh;
             display: flex; flex-direction: column;
@@ -98,7 +144,7 @@
         }
 
         .main-title {
-            font-size: clamp(65px, 18vw, 130px);
+            font-size: clamp(60px, 18vw, 130px);
             font-weight: 900; letter-spacing: 12px;
             background: linear-gradient(to bottom, #ffffff 40%, #777777 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -112,16 +158,24 @@
         }
 
         .tagline {
-            margin-top: 35px; font-size: 1.1rem; color: rgba(255,255,255,0.6);
+            margin-top: 35px; font-size: 18px; color: rgba(255,255,255,0.6);
             max-width: 550px; line-height: 1.7; font-weight: 300;
         }
 
-        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); }
 
+        /* MOBİL AYARLAR */
         @media (max-width: 768px) {
-            .nav-menu { display: none; }
-            .planet-decor { width: 300px; height: 300px; bottom: -50px; right: -30px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .main-title { letter-spacing: 6px; }
+            .planet-decor { width: 300px; height: 300px; bottom: -60px; right: -40px; }
         }
+
+        /* Hamburger Animasyonu (Aktifken X olması için) */
+        .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
     </style>
 </head>
 <body>
@@ -135,24 +189,47 @@
             <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
             <span class="logo-name">STERK</span>
         </a>
-        <div class="nav-menu">
+
+        <div class="nav-links">
             <a href="index.html">Ana Sayfa</a>
             <a href="privacy.html">Gizlilik Politikası</a>
             <a href="terms.html">Kullanım Koşulları</a>
         </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="toggleMenu()">Ana Sayfa</a>
+        <a href="privacy.html" onclick="toggleMenu()">Gizlilik Politikası</a>
+        <a href="terms.html" onclick="toggleMenu()">Kullanım Koşulları</a>
+    </div>
 
     <div class="hero">
         <h1 class="main-title">STERK</h1>
         <div class="sub-title">Planet Journey</div>
-        <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak. Derin uzayın sessizliğinde yeni dünyaların kapısını arala.</p>
+        <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak.</p>
     </div>
 
     <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
 
     <script>
+        // Hamburger ve Mobil Menü Kontrolü
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            menu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Yıldız Oluşturma
         const container = document.getElementById('stars-container');
-        const starCount = 120;
+        const starCount = 130;
+
         for (let i = 0; i < starCount; i++) {
             const star = document.createElement('div');
             star.className = 'twinkling-star';
