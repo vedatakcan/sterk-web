@@ -1,55 +1,95 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sterk - Privacy Policy</title>
     <style>
-        :root { --primary-orange: #ff5e3a; --star-white: rgba(255, 255, 255, 0.9); --nav-bg: rgba(0, 0, 0, 0.4); }
+        :root {
+            --primary-orange: #ff5e3a;
+            --star-white: rgba(255, 255, 255, 0.9);
+            --nav-bg: rgba(0, 0, 0, 0.6);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, sans-serif; color: #AEAEB2; background: #020205; overflow-x: hidden; }
+        html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #AEAEB2; background: #020205; }
+
+        /* ARKA PLAN TEMASI */
         .background-stage { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -10; background: linear-gradient(135deg, #020205 0%, #05050a 50%, #0a1931 100%); }
         .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .twinkling-star { position: absolute; background: var(--star-white); border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.2); } }
-        nav { position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(10px); }
-        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
-        .logo-name { font-size: 18px; font-weight: 800; letter-spacing: 2px; }
-        .content-container { max-width: 800px; margin: 100px auto 50px; padding: 40px; background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        h1 { color: #fff; margin-bottom: 20px; }
-        h2 { color: #fff; font-size: 19px; margin-top: 30px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        p { margin: 15px 0; line-height: 1.7; font-size: 15px; }
-        strong { color: var(--primary-orange); }
-        a { color: var(--primary-orange); text-decoration: none; }
-        @media (max-width: 600px) { .content-container { margin: 80px 15px; padding: 20px; } }
+
+        /* ÜST NAVİGASYON (GERİ TUŞU) */
+        nav { position: fixed; top: 0; width: 100%; padding: 15px 5%; display: flex; align-items: center; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .back-link { text-decoration: none; color: white; display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .back-link:hover { color: var(--primary-orange); }
+
+        /* İÇERİK */
+        .container { max-width: 800px; margin: 100px auto 50px; padding: 0 25px; line-height: 1.8; }
+        h1 { color: #ffffff; font-size: 32px; margin-bottom: 20px; text-align: center; }
+        h2 { color: #ffffff; font-size: 20px; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid #1C1C1E; padding-bottom: 8px; }
+        p { margin-bottom: 16px; font-size: 15px; }
+        ul { margin-bottom: 16px; padding-left: 20px; }
+        li { margin-bottom: 8px; font-size: 15px; }
+        strong { color: var(--primary-orange); font-weight: 600; }
+        a { color: #0A84FF; text-decoration: none; }
+
+        .footer { font-size: 12px; color: #636366; margin-top: 60px; text-align: center; padding-bottom: 40px; border-top: 1px solid #1C1C1E; padding-top: 25px; }
     </style>
 </head>
 <body>
     <div class="background-stage"><div id="stars-container" class="stars-overlay"></div></div>
+
     <nav>
-        <a href="index.html" class="logo-area"><span class="logo-name">STERK</span></a>
-        <a href="index.html" style="color:white; text-decoration:none; font-size:14px;">← Geri</a>
+        <a href="index.html" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Geri Dön / Back
+        </a>
     </nav>
-    <div class="content-container">
+
+    <div class="container">
         <h1>Privacy Policy</h1>
         <p>This Privacy Policy explains how the <strong>Sterk</strong> mobile application ("App") collects, uses, and protects user information.</p>
+
         <h2>1. Data Collection and Usage</h2>
-        <p>The App is designed with a data minimization approach: <strong>Personal Data</strong> is not collected. <strong>Local Data</strong> is stored only on your device.</p>
-        <h2>2. Advertising</h2>
-        <p>We use <strong>Google AdMob</strong>. Advertisers may use IDFA for personalized ads. You can manage this in your device settings.</p>
-        <p>Review: <a href="https://policies.google.com/privacy">Google Privacy Policy</a></p>
+        <p>The App is designed with a data minimization approach:</p>
+        <ul>
+            <li><strong>Personal Data:</strong> The App does not directly collect, store, or share personal information such as name, email, phone number, or location.</li>
+            <li><strong>Local Data:</strong> Game progress, scores, and settings are stored locally on the user’s device only.</li>
+        </ul>
+
+        <h2>2. Advertising and Third-Party Services</h2>
+        <p>The App may use third-party advertising services in order to remain free. In this context, <strong>Google AdMob</strong> is used.</p>
+        <p>Third-party advertising providers may use device identifiers (such as IDFA), cookies, and similar anonymous identifiers to serve and personalize ads. These processes are not directly controlled by the App developer.</p>
+        <p>For more information, please review <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.</p>
+
+        <h2>3. Data Security</h2>
+        <p>The App implements reasonable technical measures to protect user data. However, no method of transmission over the internet is 100% secure.</p>
+
+        <h2>4. Changes to This Policy</h2>
+        <p>This Privacy Policy may be updated from time to time. Continued use of the App after updates constitutes acceptance of the revised policy.</p>
+
         <h2>5. Contact</h2>
-        <p><strong>sterkword@gmail.com</strong></p>
+        <p>For any questions, please contact:<br><strong>sterkword@gmail.com</strong></p>
+
+        <div class="footer">
+            Last Updated: April 13, 2026<br>
+            &copy; 2026 Sterk. All rights reserved.
+        </div>
     </div>
+
     <script>
-        window.onload = () => {
-            const c = document.getElementById('stars-container');
-            for (let i = 0; i < 80; i++) {
-                const s = document.createElement('div'); s.className = 'twinkling-star';
-                s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%';
-                s.style.width = s.style.height = '1.5px'; c.appendChild(s);
-            }
-        };
+        const container = document.getElementById('stars-container');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'twinkling-star';
+            const size = Math.random() * 2 + 0.5;
+            star.style.width = size + 'px'; star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            container.appendChild(star);
+        }
     </script>
 </body>
 </html>
