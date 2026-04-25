@@ -2,72 +2,57 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sterk: Crossword - Gezegenler Arası Yolculuk</title>
     
     <style>
         :root {
             --primary-orange: #ff5e3a;
-            --nebula-blue: #0a1931;
-            --nebula-purple: #1e0d36;
-            --nebula-green: #0d2b2d;
             --star-white: rgba(255, 255, 255, 0.9);
         }
 
+        /* TÜM SAYFAYI SIFIRLA */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
             height: 100%;
+            width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #020205;
+            background-color: #020205; /* Temel siyah */
             color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* RENKLİ UZAY ARKA PLANI (NEBULA EFEKTİ) */
-        .space-bg {
+        /* ARKA PLAN SABİTLEYİCİ - EN ÖNEMLİ KISIM BURASI */
+        .background-stage {
             position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10; /* Her şeyin en arkasında */
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .space-bg {
+            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(128, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 80%, rgba(0, 128, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(128, 0, 255, 0.15) 0%, transparent 50%),
                 linear-gradient(135deg, #050508 0%, #0a1931 100%);
-            z-index: -4;
-        }
-
-        /* KUYRUKLU YILDIZ EFEKTİ */
-        .comet {
-            position: fixed;
-            top: 20%; left: -10%;
-            width: 150px; height: 2px;
-            background: linear-gradient(90deg, rgba(0,255,255,0.4), transparent);
-            border-radius: 50%;
-            filter: blur(2px);
-            transform: rotate(-15deg);
-            animation: cometMove 15s linear infinite;
-            z-index: -3;
-        }
-
-        @keyframes cometMove {
-            0% { left: -20%; opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { left: 120%; opacity: 0; }
         }
 
         .stars-overlay {
-            position: fixed;
+            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            pointer-events: none;
         }
 
         .twinkling-star {
             position: absolute;
             background: var(--star-white);
             border-radius: 50%;
-            box-shadow: 0 0 4px var(--star-white);
             animation: twinkle 3s infinite ease-in-out;
         }
 
@@ -76,95 +61,76 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        /* RENKLİ GEZEGENLER (GÖRSELDEKİ GİBİ) */
+        /* GEZEGENLERİ BURAYA ALDIK */
         .planet {
-            position: fixed;
+            position: absolute;
             border-radius: 50%;
-            z-index: -1;
-            opacity: 0.9;
-            box-shadow: inset -10px -10px 30px rgba(0,0,0,0.8);
+            box-shadow: inset -20px -20px 50px rgba(0,0,0,0.9);
         }
 
-        /* Satürn benzeri halkalı gezegen */
         .planet-saturn {
-            width: 120px; height: 120px;
+            width: 150px; height: 150px;
             background: radial-gradient(circle at 30% 30%, #d4a373, #3f3225);
-            bottom: 15%; left: 10%;
-        }
-        .planet-saturn::after {
-            content: ''; position: absolute;
-            top: 50%; left: 50%;
-            width: 200%; height: 20px;
-            border: 4px solid rgba(212, 163, 115, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-        }
-
-        /* Mavi buz gezegeni */
-        .planet-blue {
-            width: 80px; height: 80px;
-            background: radial-gradient(circle at 30% 30%, #48cae4, #023e8a);
-            top: 25%; right: 15%;
-            box-shadow: 0 0 20px rgba(0, 180, 216, 0.2);
+            bottom: 10%;
+            left: -30px; /* Mobilde biraz dışarı çıksın şık durur */
         }
 
         /* NAVİGASYON */
         nav {
-            position: fixed;
+            position: absolute; /* Fixed yerine absolute yaparak çakışmayı önledik */
             top: 0; width: 100%;
-            padding: 20px 5%;
+            padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 100;
         }
 
-        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
-        .logo-img { width: 38px; height: 38px; border-radius: 10px; }
-        .logo-name { font-size: 20px; font-weight: 900; letter-spacing: 2px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; }
+        .logo-name { font-size: 18px; font-weight: 800; letter-spacing: 2px; }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary-orange); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px; }
 
-        /* HERO AREA */
+        /* ANA İÇERİK */
         .hero {
+            position: relative;
             height: 100vh;
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            z-index: 1;
+            padding: 0 30px;
+            background: transparent; /* Arkasını gösterir */
         }
 
         .main-title {
-            font-size: clamp(60px, 15vw, 130px);
-            font-weight: 900; letter-spacing: 12px;
-            background: linear-gradient(to bottom, #ffffff, #aaaaaa);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: clamp(50px, 15vw, 120px);
+            font-weight: 900; letter-spacing: 8px;
+            margin-bottom: 5px;
         }
 
-        .sub-title { font-size: 15px; color: var(--primary-orange); letter-spacing: 7px; font-weight: 700; margin-top: 10px; }
-        .tagline { margin-top: 25px; font-size: 18px; color: rgba(255,255,255,0.7); max-width: 500px; }
+        .sub-title { color: var(--primary-orange); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 14px; }
+        .tagline { margin-top: 20px; font-size: 16px; color: rgba(255,255,255,0.6); max-width: 400px; line-height: 1.5; }
 
-        footer { position: absolute; bottom: 25px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.3); }
-
-        /* MOBİL */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .planet-saturn { width: 80px; height: 80px; }
-            .planet-blue { width: 50px; height: 50px; }
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 9px;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="space-bg"></div>
-    <div class="comet"></div>
-    <div id="stars-container" class="stars-overlay"></div>
-    
-    <div class="planet planet-saturn"></div>
-    <div class="planet planet-blue"></div>
+    <div class="background-stage">
+        <div class="space-bg"></div>
+        <div id="stars-container" class="stars-overlay"></div>
+        <div class="planet planet-saturn"></div>
+    </div>
 
     <nav>
         <a href="index.html" class="logo-area">
@@ -172,25 +138,26 @@
             <span class="logo-name">STERK</span>
         </a>
         <div class="nav-links">
-            <a href="index.html">Ana Sayfa</a>
-            <a href="privacy.html">Gizlilik Politikası</a>
-            <a href="terms.html">Kullanım Koşulları</a>
+            <a href="privacy.html">Gizlilik</a>
+            <a href="terms.html">Koşullar</a>
         </div>
     </nav>
 
-    <div class="hero">
+    <main class="hero">
         <h1 class="main-title">STERK</h1>
         <div class="sub-title">Planet Journey</div>
         <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak.</p>
-    </div>
+    </main>
 
-    <footer>&copy; 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
+    <footer>© 2026 STERK. TÜM HAKLARI SAKLIDIR.</footer>
 
     <script>
-        // Yıldızları oluşturma
-        window.onload = function() {
+        // Yıldız oluşturma mantığı aynı ama konteyner içine garantili ekleme yapıyoruz
+        function createStars() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 180; i++) {
+            if(!container) return;
+            
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2 + 0.5;
@@ -200,14 +167,11 @@
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 star.style.animationDelay = Math.random() * 5 + 's';
-                
-                // Bazı yıldızları renkli yap (görseldeki gibi)
-                const colors = ['#ffffff', '#ffffff', '#aaddff', '#ffeedd'];
-                star.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
                 container.appendChild(star);
             }
-        };
+        }
+        
+        window.onload = createStars;
     </script>
 </body>
 </html>
