@@ -1,190 +1,197 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sterk: Crossword</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sterk: Crossword - Gezegenler Arası Yolculuk</title>
+    
+    <style>
+        :root {
+            --primary-orange: #ff5e3a;
+            --deep-space: #020205;
+            --star-color: #ffffff;
+        }
 
-<style>
-:root {
-    --primary-orange: #ff5e3a;
-    --deep-space: #020205;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* RESET */
-* { margin:0; padding:0; box-sizing:border-box; }
+        body, html {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--deep-space);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
 
-body {
-    font-family: -apple-system, sans-serif;
-    background: radial-gradient(ellipse at bottom, #0a0a1a 0%, #000 100%);
-    color:white;
-    overflow-x:hidden;
-}
+        /* CSS TABANLI PARLAYAN YILDIZLAR */
+        .stars-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at bottom, #1a0b2e 0%, var(--deep-space) 70%);
+        }
 
-/* 🌌 YILDIZ KATMANLARI (PARALLAX) */
-.stars, .stars2, .stars3 {
-    position: fixed;
-    width: 200%;
-    height: 200%;
-    background-repeat: repeat;
-    z-index:-1;
-}
+        /* Küçük ve orta boy yıldızlar için kutu gölgesi (box-shadow) tekniği */
+        .stars {
+            width: 1px; height: 1px;
+            background: transparent;
+            box-shadow: 24vw 15vh #FFF, 56vw 34vh #FFF, 12vw 88vh #FFF, 89vw 45vh #FFF, 45vw 22vh #FFF, 76vw 67vh #FFF, 33vw 56vh #FFF, 90vw 10vh #FFF, 10vw 30vh #FFF, 60vw 80vh #FFF, 25vw 75vh #FFF, 50vw 50vh #FFF;
+            animation: twinkle 4s infinite ease-in-out;
+        }
 
-.stars { background-image: radial-gradient(2px 2px white, transparent); animation: moveStars 200s linear infinite; }
-.stars2 { background-image: radial-gradient(1px 1px #aaa, transparent); animation: moveStars 300s linear infinite; opacity:0.5; }
-.stars3 { background-image: radial-gradient(1.5px 1.5px #fff, transparent); animation: moveStars 150s linear infinite; opacity:0.3; }
+        .stars-large {
+            width: 2px; height: 2px;
+            background: transparent;
+            box-shadow: 15vw 25vh #FFF, 85vw 75vh #FFF, 40vw 90vh #FFF, 70vw 20vh #FFF, 30vw 45vh #FFF;
+            animation: twinkle 6s infinite ease-in-out;
+        }
 
-@keyframes moveStars {
-    from { transform: translate(0,0); }
-    to { transform: translate(-50%, -50%); }
-}
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
 
-/* NAV */
-nav {
-    position: fixed;
-    width:100%;
-    top:0;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 5%;
-    z-index:1000;
-}
+        /* GEZEGEN */
+        .planet {
+            position: fixed;
+            bottom: -80px;
+            left: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle at 70% 30%, #333 0%, #000 80%);
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 40px rgba(0,0,0,1), 15px 15px 40px rgba(255, 94, 58, 0.1);
+            z-index: -1;
+            opacity: 0.6;
+        }
 
-/* LOGO */
-.logo-area {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-    color:white;
-}
+        /* NAVİGASYON */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
 
-.logo-img { width:35px; }
+        .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; box-shadow: 0 0 10px var(--primary-orange); }
+        .logo-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
 
-/* MENU */
-.nav-menu {
-    display:flex;
-    gap:25px;
-}
+        .nav-menu { display: flex; gap: 20px; }
+        .nav-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; transition: 0.3s; font-weight: 500; }
+        .nav-menu a:hover { color: var(--primary-orange); }
 
-.nav-menu a {
-    text-decoration:none;
-    color:rgba(255,255,255,0.6);
-    font-size:12px;
-}
+        /* HAMBURGER MENÜ (MOBİL) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px; height: 2px;
+            background-color: white;
+            transition: 0.3s;
+        }
 
-.nav-menu a:hover {
-    color:var(--primary-orange);
-}
+        .mobile-menu {
+            position: fixed;
+            top: 0; right: -100%;
+            width: 70%; height: 100%;
+            background: var(--deep-space);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            gap: 30px;
+            transition: 0.4s;
+            z-index: 999;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 20px; }
 
-/* 🍔 HAMBURGER */
-.hamburger {
-    display:none;
-    flex-direction:column;
-    cursor:pointer;
-}
+        /* HERO ALANI */
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
 
-.hamburger span {
-    width:25px;
-    height:3px;
-    background:white;
-    margin:4px 0;
-}
+        .main-title {
+            font-size: clamp(50px, 12vw, 80px);
+            font-weight: 900; letter-spacing: 12px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
 
-/* HERO */
-.hero {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
+        .sub-title {
+            font-size: 14px; color: var(--primary-orange);
+            letter-spacing: 6px; text-transform: uppercase;
+        }
 
-.main-title {
-    font-size: clamp(50px, 10vw, 80px);
-    letter-spacing:12px;
-    font-weight:900;
-}
+        .tagline {
+            margin-top: 30px; font-size: 16px; color: rgba(255,255,255,0.5);
+            max-width: 450px; line-height: 1.6;
+        }
 
-.sub-title {
-    color:var(--primary-orange);
-    letter-spacing:6px;
-    margin-top:10px;
-}
+        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-size: 10px; color: rgba(255,255,255,0.2); }
 
-.tagline {
-    margin-top:30px;
-    opacity:0.6;
-    max-width:400px;
-}
-
-/* 📱 MOBİL */
-@media(max-width:768px){
-
-    .nav-menu {
-        position:absolute;
-        top:70px;
-        right:0;
-        background:#000;
-        flex-direction:column;
-        width:200px;
-        padding:20px;
-        display:none;
-    }
-
-    .nav-menu.active {
-        display:flex;
-    }
-
-    .hamburger {
-        display:flex;
-    }
-}
-
-</style>
+        /* MOBİL MEDYA SORGUSU */
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- 🌌 YILDIZLAR -->
-<div class="stars"></div>
-<div class="stars2"></div>
-<div class="stars3"></div>
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars-large"></div>
+    </div>
+    
+    <div class="planet"></div>
 
-<nav>
-    <a href="#" class="logo-area">
-        <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" class="logo-img">
-        <span>STERK</span>
-    </a>
+    <nav>
+        <a href="index.html" class="logo-area">
+            <img src="logo.png" alt="Sterk Logo" class="logo-img">
+            <span class="logo-name">STERK</span>
+        </a>
+        
+        <div class="nav-menu">
+            <a href="index.html">Ana Sayfa</a>
+            <a href="privacy.html">Gizlilik</a>
+            <a href="terms.html">Koşullar</a>
+        </div>
 
-    <div class="nav-menu" id="menu">
-        <a href="#">ANA SAYFA</a>
-        <a href="privacy.html">GİZLİLİK</a>
-        <a href="terms.html">KOŞULLAR</a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="toggleMenu()">Ana Sayfa</a>
+        <a href="privacy.html" onclick="toggleMenu()">Gizlilik Politikası</a>
+        <a href="terms.html" onclick="toggleMenu()">Kullanım Koşulları</a>
     </div>
 
-    <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="hero">
+        <h1 class="main-title">STERK</h1>
+        <div class="sub-title">Planet Journey</div>
+        <p class="tagline">Gezegenler arası kelime avında zihnini özgür bırak.</p>
     </div>
-</nav>
 
-<div class="hero">
-    <h1 class="main-title">STERK</h1>
-    <div class="sub-title">SPACE WORD GAME</div>
-    <p class="tagline">
-        Discover words across the galaxy. Challenge your mind beyond the stars.
-    </p>
-</div>
+    <footer>&copy; 2026 STERK. Tüm Hakları Saklıdır.</footer>
 
-<script>
-function toggleMenu(){
-    document.getElementById("menu").classList.toggle("active");
-}
-</script>
-
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
