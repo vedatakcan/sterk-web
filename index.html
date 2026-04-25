@@ -22,155 +22,121 @@
             overflow: hidden;
         }
 
-        /* 1. KATMAN: NEBULA VE RENK GEÇİŞLERİ */
+        /* NEBULA DERİNLİK */
         .nebula-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 80% 20%, rgba(255, 94, 58, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 20% 80%, rgba(0, 150, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(255, 94, 58, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 20% 80%, rgba(0, 150, 255, 0.05) 0%, transparent 40%),
                 radial-gradient(ellipse at bottom, var(--nebula-glow) 0%, transparent 70%);
             z-index: -3;
         }
 
-        /* 2. KATMAN: DİNAMİK YILDIZLAR */
-        .stars-overlay {
+        /* PARLAYAN VE HAREKETLİ YILDIZLAR */
+        .star-field {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png'); /* İnce yıldız dokusu */
-            opacity: 0.3;
             z-index: -2;
+            overflow: hidden;
         }
 
-        /* 3. KATMAN: PARLAYAN GEZEGENLER (Görseldeki gibi) */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* GEZEGENLER */
         .planet {
             position: fixed;
             border-radius: 50%;
             z-index: -1;
             filter: blur(1px);
+            opacity: 0.7;
         }
 
         .main-planet {
             bottom: -100px;
             left: -100px;
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle at 70% 30%, #444 0%, #000 80%);
-            box-shadow: inset -20px -20px 50px rgba(0,0,0,1), 20px 20px 60px rgba(255, 94, 58, 0.15);
-            animation: slowRotate 120s linear infinite;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle at 70% 30%, #333 0%, #000 80%);
+            box-shadow: inset -10px -10px 40px rgba(0,0,0,1), 15px 15px 50px rgba(255, 94, 58, 0.1);
         }
 
-        .small-planet {
-            top: 15%;
-            right: 10%;
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle at 30% 30%, #555, #000);
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.2);
-            opacity: 0.6;
-        }
-
-        /* 4. KATMAN: KOZMİK TOZ VE HAREKET */
-        .shooting-star {
-            position: absolute;
-            width: 150px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            transform: rotate(-45deg);
-            opacity: 0;
-            animation: meteor 10s ease-in infinite;
-        }
-
-        @keyframes meteor {
-            0% { transform: translate(100vw, 0) rotate(-45deg); opacity: 0; }
-            5% { opacity: 1; }
-            15% { transform: translate(-100px, 100vh) rotate(-45deg); opacity: 0; }
-            100% { opacity: 0; }
-        }
-
-        /* İÇERİK TASARIMI */
+        /* İÇERİK */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            padding: 30px 5%;
+            padding: 25px 5%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 100;
         }
 
-        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
-        .logo-img { width: 45px; height: 45px; border-radius: 12px; box-shadow: 0 0 20px rgba(255, 94, 58, 0.6); }
-        .logo-name { font-size: 26px; font-weight: 900; letter-spacing: 3px; }
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+        .logo-img { width: 38px; height: 38px; border-radius: 10px; box-shadow: 0 0 15px rgba(255, 94, 58, 0.4); }
+        .logo-name { font-size: 20px; font-weight: 800; letter-spacing: 2px; }
 
-        .nav-menu a { color: rgba(255,255,255,0.6); text-decoration: none; margin-left: 30px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-menu a:hover { color: var(--primary-orange); text-shadow: 0 0 10px var(--primary-orange); }
+        .nav-menu a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 25px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-menu a:hover { color: var(--primary-orange); }
 
         .hero {
             height: 100vh;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
             text-align: center;
-            position: relative;
         }
 
         .main-title {
-            font-size: clamp(80px, 18vw, 160px);
+            font-size: clamp(50px, 10vw, 85px); /* Daha makul bir boyut */
             font-weight: 900;
-            letter-spacing: 25px;
-            background: linear-gradient(to bottom, #fff 40%, #555 100%);
+            letter-spacing: 15px;
+            background: linear-gradient(to bottom, #fff 50%, #888 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px rgba(255,255,255,0.1));
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .sub-title {
-            font-size: 20px;
+            font-size: 14px;
             color: var(--primary-orange);
-            letter-spacing: 12px;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            font-weight: 400;
-            animation: pulse 4s ease-in-out infinite;
+            opacity: 0.8;
         }
 
         .tagline {
-            margin-top: 60px;
-            font-size: clamp(14px, 2vw, 18px);
-            color: rgba(255,255,255,0.5);
-            max-width: 550px;
-            line-height: 1.8;
+            margin-top: 40px;
+            font-size: 16px;
+            color: rgba(255,255,255,0.4);
+            max-width: 500px;
+            line-height: 1.6;
             font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; letter-spacing: 12px; }
-            50% { opacity: 1; letter-spacing: 14px; }
         }
 
         footer {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             width: 100%;
             text-align: center;
-            font-size: 10px;
+            font-size: 9px;
             color: rgba(255,255,255,0.2);
-            letter-spacing: 2px;
-        }
-
-        /* MOBİL DÜZENLEMELER */
-        @media (max-width: 768px) {
-            .main-title { letter-spacing: 10px; }
-            .nav-menu { display: none; }
-            .main-planet { width: 250px; height: 250px; bottom: -50px; left: -50px; }
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
     <div class="nebula-container"></div>
-    <div class="stars-overlay"></div>
+    <div class="star-field" id="starField"></div>
     <div class="planet main-planet"></div>
-    <div class="planet small-planet"></div>
-    <div class="shooting-star"></div>
 
     <nav>
         <a href="index.html" class="logo-area">
@@ -187,12 +153,35 @@
     <div class="hero">
         <h1 class="main-title">STERK</h1>
         <div class="sub-title">PLANET JOURNEY</div>
-        <p class="tagline">Kelimelerin gücüyle galaksiyi keşfet. Yıldızların arasında zihnini özgür bırak ve gizli dünyaları açığa çıkar.</p>
+        <p class="tagline">Kelimelerin gücüyle galaksiyi keşfet. Yıldızların arasında zihnini özgür bırak.</p>
     </div>
 
     <footer>
-        &copy; 2026 MEJI TEAM. ALL RIGHTS RESERVED.
+        &copy; 2026 STERK. ALL RIGHTS RESERVED.
     </footer>
 
+    <script>
+        // Rastgele parlayan yıldızlar oluşturma
+        const starField = document.getElementById('starField');
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const size = Math.random() * 2 + 1;
+            const duration = Math.random() * 3 + 2;
+
+            star.style.left = `${x}%`;
+            star.style.top = `${y}%`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.setProperty('--duration', `${duration}s`);
+            
+            starField.appendChild(star);
+        }
+    </script>
 </body>
 </html>
