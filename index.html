@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"> <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sterk: Crossword - An Interstellar Journey</title>
-    
     <style>
-        /* CSS kısmını aynen koruyabilirsin, sadece root renklerindeki yorumları istersen silebilirsin */
         :root {
             --primary-orange: #ff5e3a;
             --star-white: rgba(255, 255, 255, 0.9);
@@ -13,9 +12,7 @@
             --glass-bg: rgba(255, 255, 255, 0.03); 
             --glass-border: rgba(255, 255, 255, 0.1);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html, body {
             height: 100%; width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -23,27 +20,21 @@
             background-color: #020205;
             overflow-x: hidden;
         }
-
-        /* ARKA PLAN */
         .background-stage {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1; pointer-events: none;
             background: linear-gradient(135deg, #020205 0%, #05050a 40%, #0a1931 100%);
         }
-
         .stars-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
-        
         .twinkling-star {
             position: absolute; background: var(--star-white); border-radius: 50%;
             animation: twinkle 3s infinite ease-in-out;
             box-shadow: 0 0 5px rgba(255,255,255,0.5);
         }
-
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.3); }
         }
-
         .planet-saturn {
             position: absolute; width: 180px; height: 180px; border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #d4a373, #3f3225);
@@ -51,8 +42,6 @@
             box-shadow: inset -20px -20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(212, 163, 115, 0.2);
             z-index: 3;
         }
-
-        /* NAVİGASYON */
         nav {
             position: fixed; top: 0; width: 100%; padding: 20px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -61,139 +50,58 @@
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-
         .logo-area { display: flex; align-items: center; gap: 10px; text-decoration: none; color: white; }
         .logo-img { width: 35px; height: 35px; border-radius: 8px; }
         .logo-name { font-size: 18px; font-weight: 800; letter-spacing: 2px; }
-
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: 14px; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary-orange); }
-
-        .hamburger { 
-            display: none; cursor: pointer; background: none; border: none; 
-            z-index: 1200; padding: 10px; 
-        }
-        .hamburger span { 
-            display: block; width: 25px; height: 2px; background: white; 
-            margin: 6px 0; transition: 0.4s; border-radius: 2px; 
-        }
-
+        .hamburger { display: none; cursor: pointer; background: none; border: none; z-index: 1200; padding: 10px; }
+        .hamburger span { display: block; width: 25px; height: 2px; background: white; margin: 6px 0; transition: 0.4s; border-radius: 2px; }
         .hamburger.open span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-
-        /* MOBİL MENÜ */
         .mobile-menu {
-            position: fixed; top: 0; right: -100%; 
-            width: 75%; height: 100vh;
-            background: rgba(10, 25, 49, 0.95);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            display: flex; flex-direction: column; justify-content: center; 
-            padding-left: 40px; gap: 35px; 
-            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0); 
-            z-index: 1050;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            border-left: 1px solid rgba(255,255,255,0.1);
+            position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+            background: rgba(10, 25, 49, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            display: flex; flex-direction: column; justify-content: center; padding-left: 40px; gap: 35px; 
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0); z-index: 1050;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5); border-left: 1px solid rgba(255,255,255,0.1);
         }
         .mobile-menu.active { right: 0; }
-        .mobile-menu a { 
-            font-size: 20px; color: white; text-decoration: none; 
-            font-weight: 600; letter-spacing: 1px; transition: 0.3s;
-        }
+        .mobile-menu a { font-size: 20px; color: white; text-decoration: none; font-weight: 600; letter-spacing: 1px; transition: 0.3s; }
         .mobile-menu a:hover { color: var(--primary-orange); }
-
-        .menu-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden;
-            transition: 0.4s; z-index: 1040;
-        }
+        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: 0.4s; z-index: 1040; }
         .menu-overlay.active { opacity: 1; visibility: visible; }
-
-        /* HERO & BANNER */
-        .hero {
-            position: relative; height: 100vh; 
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            z-index: 10;
-        }
-
-        .hero-banner {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 40px 60px;
-            border-radius: 24px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        .main-title {
-            font-size: clamp(60px, 15vw, 100px); font-weight: 900; letter-spacing: 10px;
-            background: linear-gradient(to bottom, #ffffff 30%, #a1a1a1 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
-
-        .sub-title { 
-            color: var(--primary-orange); 
-            letter-spacing: 8px; 
-            font-weight: 700; 
-            font-size: clamp(14px, 4vw, 20px); 
-            margin-top: 5px;
-            text-transform: uppercase;
-        }
-
-        .tagline { 
-            margin-top: 25px; 
-            font-size: clamp(14px, 3vw, 18px); 
-            color: rgba(255,255,255,0.7); 
-            max-width: 450px; 
-            line-height: 1.6;
-        }
-
+        .hero { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 10; }
+        .hero-banner { background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 40px 60px; border-radius: 24px; border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); }
+        .main-title { font-size: clamp(60px, 15vw, 100px); font-weight: 900; letter-spacing: 10px; background: linear-gradient(to bottom, #ffffff 30%, #a1a1a1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+        .sub-title { color: var(--primary-orange); letter-spacing: 8px; font-weight: 700; font-size: clamp(14px, 4vw, 20px); margin-top: 5px; text-transform: uppercase; }
+        .tagline { margin-top: 25px; font-size: clamp(14px, 3vw, 18px); color: rgba(255,255,255,0.7); max-width: 450px; line-height: 1.6; }
         footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); z-index: 10; }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hamburger { display: block; }
-            .planet-saturn { width: 120px; height: 120px; bottom: 10%; right: 5%; }
-            .hero-banner { padding: 30px 20px; width: 90%; }
-        }
+        @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } .planet-saturn { width: 120px; height: 120px; bottom: 10%; right: 5%; } .hero-banner { padding: 30px 20px; width: 90%; } }
     </style>
 </head>
 <body>
-
-    <div class="background-stage">
-        <div id="stars-container" class="stars-overlay"></div>
-        <div class="planet-saturn"></div>
-    </div>
-
+    <div class="background-stage"><div id="stars-container" class="stars-overlay"></div><div class="planet-saturn"></div></div>
     <div class="menu-overlay" id="menuOverlay"></div>
-
     <nav>
         <a href="index.html" class="logo-area">
             <img src="https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png" alt="Sterk Logo" class="logo-img">
             <span class="logo-name">STERK</span>
         </a>
-
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="privacy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Use</a>
         </div>
-
-        <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
-
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Home</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms of Use</a>
     </div>
-
     <main class="hero">
         <div class="hero-banner">
             <h1 class="main-title">STERK</h1>
@@ -201,42 +109,27 @@
             <p class="tagline">Embark on a cosmic word hunt, free your mind, and unlock the mysteries of the universe.</p>
         </div>
     </main>
-
     <footer>&copy; 2026 STERK. ALL RIGHTS RESERVED.</footer>
-
     <script>
-        // JS kısmını aynen bırakabilirsin, herhangi bir dil bağımlılığı yok.
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuOverlay = document.getElementById('menuOverlay');
-
         function toggleMenu() {
             hamburger.classList.toggle('open');
             mobileMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
         }
-
-        window.onpageshow = function(event) {
-            hamburger.classList.remove('open');
-            mobileMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        };
-
         hamburger.addEventListener('click', toggleMenu);
         menuOverlay.addEventListener('click', toggleMenu);
-
         window.onload = function() {
             const container = document.getElementById('stars-container');
             for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'twinkling-star';
                 const size = Math.random() * 2.5 + 0.5;
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
+                star.style.width = size + 'px'; star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%'; star.style.top = Math.random() * 100 + '%';
                 star.style.animationDuration = (Math.random() * 3 + 2) + 's';
                 star.style.animationDelay = Math.random() * 2 + 's';
                 container.appendChild(star);
