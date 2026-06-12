@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sterk: Crossword</title>
+
+  <!-- Sosyal Medya Önizleme Ayarları (Meta Etiketleri) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sterk: Crossword" />
+  <meta property="og:description" content="Kelimelerin evreninde zihnini yarıştır! Arkadaşının davetine katıl ve bulmacaları çözmeye başla." />
+  <meta property="og:url" content="https://vedatakcan.github.io/sterk-web/invite/" />
+  
+  <!-- Repondaki logo.png ismine göre güncellendi -->
+  <meta property="og:image" content="https://vedatakcan.github.io/sterk-web/logo.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="300" />
+  <meta property="og:image:height" content="300" />
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sterk: Crossword">
+  <meta name="twitter:description" content="Kelimelerin evreninde zihnini yarıştır!">
+  <meta name="twitter:image" content="https://vedatakcan.github.io/sterk-web/logo.png">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      /* Sterk'in uzay temasına uygun koyu arka plan */
+      background-color: #050508; 
+      color: white;
+      text-align: center;
+    }
+    .loader {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      border-top: 4px solid #9c27b0; /* Sterk temasına uygun mor/neon yükleme çizgisi */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .message {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    a {
+      color: #9c27b0;
+      text-decoration: none;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="loader"></div>
+<div class="message">Sterk'e yönlendiriliyorsunuz...</div>
+<a id="fallback-link" href="#">Eğer yönlendirilmediyseniz tıklayın ➜</a>
+
+<script>
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+  // Sterk uygulamasının güncel mağaza linkleri
+  const iosStore = "https://apps.apple.com/app/id6763731084";
+  const androidStore = "https://play.google.com/store/apps/details?id=com.vedatakcan.sterk";
+  const fallback = "https://vedatakcan.github.io/sterk-web/";
+
+  let targetUrl = fallback;
+
+  if (isIOS) {
+    targetUrl = iosStore;
+  } else if (isAndroid) {
+    targetUrl = androidStore;
+  }
+
+  document.getElementById("fallback-link").href = targetUrl;
+  
+  // Yönlendirmeyi tetikle
+  window.location.replace(targetUrl);
+</script>
+
+</body>
+</html>
