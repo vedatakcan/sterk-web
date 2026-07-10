@@ -1,0 +1,5 @@
+Sitemap: https://vedatakcan.github.io/sterk-web/sitemap.xml
+User-agent: *
+Allow: /
+# If you have staging or internal sections, block them here:
+# Disallow: /staging/
