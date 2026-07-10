@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Replace https://sterk.app with your real site URL if different -->
+<!-- GitHub Pages sitemap for project site -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sterk.app/</loc>
+    <loc>https://vedatakcan.github.io/sterk-web/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sterk.app/privacy.html</loc>
+    <loc>https://vedatakcan.github.io/sterk-web/privacy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://sterk.app/terms.html</loc>
+    <loc>https://vedatakcan.github.io/sterk-web/terms.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://sterk.app/invite/</loc>
+    <loc>https://vedatakcan.github.io/sterk-web/invite/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
