@@ -11,6 +11,11 @@
     <link rel="canonical" href="https://vedatakcan.github.io/sterk-web/">
     <link rel="alternate" href="https://vedatakcan.github.io/sterk-web/" hreflang="en" />
 
+    <!-- Favicon and theme -->
+    <link rel="icon" href="https://vedatakcan.github.io/sterk-web/assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="https://vedatakcan.github.io/sterk-web/assets/favicon.svg">
+    <meta name="theme-color" content="#5b2dd6">
+
     <!-- Add Google Search Console verification meta tag here after creating property -->
     <!-- <meta name="google-site-verification" content="PASTE_YOUR_TOKEN_HERE" /> -->
 
@@ -178,5 +183,30 @@
             }
         };
     </script>
+
+    <!-- WebSite + Organization structured data to set site name and publisher for search results -->
+    <script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://vedatakcan.github.io/sterk-web/#website",
+          "url": "https://vedatakcan.github.io/sterk-web/",
+          "name": "Sterk",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://vedatakcan.github.io/sterk-web/#organization" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://vedatakcan.github.io/sterk-web/#organization",
+          "name": "Sterk",
+          "url": "https://vedatakcan.github.io/sterk-web/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://raw.githubusercontent.com/vedatakcan/sterk-web/main/logo.png"
+          }
+        }
+      ]
+    }</script>
 </body>
 </html>
